@@ -1,0 +1,202 @@
+.english-page {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 52px 24px 72px;
+}
+
+.english-heading,
+.english-section,
+.english-quiz {
+  margin-bottom: 22px;
+  padding: 30px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.2);
+}
+
+.english-heading h1,
+.english-section h2,
+.english-quiz h2 {
+  margin: 0 0 12px;
+  color: white;
+  line-height: 1.1;
+}
+
+.english-heading h1 {
+  font-size: clamp(2.2rem, 5vw, 4rem);
+}
+
+.english-heading p:last-child,
+.english-section > p,
+.english-quiz > p {
+  color: var(--muted);
+}
+
+.english-section h2,
+.english-quiz h2 {
+  color: var(--yellow);
+  font-size: 1.7rem;
+}
+
+.english-section h3 {
+  margin-top: 26px;
+  color: #67e8f9;
+}
+
+.word-grid,
+.grammar-table {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.word-grid span,
+.grammar-table div {
+  padding: 13px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 10px;
+  color: rgba(255, 255, 255, 0.86);
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.grammar-table div {
+  display: grid;
+  gap: 4px;
+}
+
+.grammar-table strong:first-child {
+  color: var(--yellow);
+}
+
+.grammar-table span {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.answer-field {
+  display: block;
+  margin: 14px 0;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 600;
+}
+
+.answer-field input,
+.answer-field textarea {
+  display: block;
+  width: 100%;
+  margin-top: 7px;
+  padding: 11px 13px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 9px;
+  outline: none;
+  color: white;
+  background: rgba(0, 0, 0, 0.2);
+  font: inherit;
+  resize: vertical;
+}
+
+.answer-field input:focus,
+.answer-field textarea:focus {
+  border-color: var(--yellow);
+  box-shadow: 0 0 0 3px rgba(250, 204, 21, 0.2);
+}
+
+.reading-text {
+  padding: 20px;
+  border-left: 4px solid var(--yellow);
+  color: rgba(255, 255, 255, 0.88) !important;
+  background: rgba(255, 255, 255, 0.06);
+  line-height: 1.85;
+}
+
+.english-correction {
+  margin-top: 22px;
+  padding-top: 15px;
+  border-top: 1px solid var(--line);
+}
+
+.english-correction summary {
+  color: var(--yellow);
+  cursor: pointer;
+  font-weight: 800;
+}
+
+.english-correction li {
+  margin: 8px 0;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.english-quiz {
+  border-color: rgba(250, 204, 21, 0.45);
+  background: linear-gradient(145deg, rgba(250, 204, 21, 0.12), rgba(236, 72, 153, 0.12));
+}
+
+.english-question {
+  margin: 18px 0;
+  padding: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 12px;
+  color: white;
+}
+
+.english-question legend {
+  padding: 0 7px;
+  font-weight: 600;
+}
+
+.english-question label {
+  display: block;
+  margin: 10px 0;
+  color: rgba(255, 255, 255, 0.82);
+  cursor: pointer;
+}
+
+.english-question input {
+  margin-right: 9px;
+  accent-color: var(--coral);
+}
+
+.english-button {
+  padding: 14px 22px;
+  border: 0;
+  border-radius: 14px;
+  color: #1e1b4b;
+  background: linear-gradient(145deg, var(--yellow), var(--coral));
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.english-score {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 20px;
+  padding: 18px;
+  border: 1px solid rgba(34, 197, 94, 0.6);
+  border-radius: 12px;
+  color: white;
+  background: rgba(34, 197, 94, 0.18);
+}
+
+.english-score strong {
+  font-size: 1.45rem;
+}
+
+@media (max-width: 650px) {
+  .english-page {
+    padding: 28px 16px 48px;
+  }
+
+  .english-heading,
+  .english-section,
+  .english-quiz {
+    padding: 22px 18px;
+  }
+
+  .word-grid,
+  .grammar-table {
+    grid-template-columns: 1fr;
+  }
+}
