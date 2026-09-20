@@ -1,0 +1,73 @@
+/* Readable text for all module lesson pages */
+
+/* 1. Body text, questions, labels, corrections */
+body :is(
+  .lesson-section p, .lesson-section li, .quiz-section p,
+  .quiz-question, .quiz-question label, .quiz-question legend, .correction li,
+  .present-question, .present-question label, .present-correction p,
+  .tense-question, .tense-question label,
+  .english-question, .english-question label, .english-correction li,
+  .seventh-question, .seventh-question label, .seventh-correction p,
+  .fifth-question, .fifth-question label, .fifth-correction p,
+  .reading-question, .reading-question label, .reading-correction li,
+  .fourth-question, .fourth-question label, .fourth-correction p,
+  .environment-question, .environment-question label, .environment-correction p,
+  .reading-text, .reading-box, .reading-story, .seventh-reading,
+  .environment-story, .dialogue, .writing-lines
+) {
+  color: var(--ink, #163c2b);
+}
+
+/* 2. Grids and chips (conjugations, tables, vocabulary) */
+body :is(
+  .conjugation-grid span, .adjective-grid span, .ending-grid span,
+  .grammar-table span, .grammar-table div, .word-grid span,
+  .tense-cards span, .tense-cards em, .time-cards span, .time-cards small,
+  .number-strip span, .arabic-grid span, .vocabulary-review span,
+  .seventh-table span, .job-grid span, .time-grid span
+) {
+  color: var(--ink, #163c2b);
+}
+
+/* 3. Answer areas and input fields */
+body :is(
+  .present-answer, .tense-answer, .fourth-answer, .environment-answer,
+  .fifth-answer, .seventh-answer, .reading-answer, .answer-field
+) {
+  color: var(--ink, #163c2b);
+}
+body :is(
+  .present-answer, .tense-answer, .fourth-answer, .environment-answer,
+  .fifth-answer, .seventh-answer, .reading-answer, .answer-field
+) :is(input, textarea) {
+  color: var(--ink, #163c2b);
+  background: #ffffff;
+  border: 1px solid #9db8a8;
+}
+
+/* 4. Section titles and sub-titles */
+body :is(
+  .lesson-section h2, .quiz-section h2,
+  .present-section h2, .tense-section h2, .tense-quiz h2,
+  .english-section h2, .english-quiz h2, .seventh-section h2,
+  .fifth-section h2, .reading-section h2, .reading-quiz h2,
+  .fourth-section h2, .environment-section h2
+) {
+  color: var(--ink, #163c2b);
+}
+body :is(
+  .lesson-section, .quiz-section, .present-section, .tense-section, .tense-quiz,
+  .english-section, .english-quiz, .seventh-section, .fifth-section,
+  .reading-section, .reading-quiz, .fourth-section, .environment-section
+) :is(h3, h4) {
+  color: #8a4b08;
+}
+
+/* 5. Page titles (h1). Delete this block if your page titles sit on a dark banner. */
+body :is(
+  .module-heading h1, .present-heading h1, .tenses-heading h1, .english-heading h1,
+  .seventh-heading h1, .fifth-heading h1, .reading-heading h1,
+  .fourth-heading h1, .environment-heading h1
+) {
+  color: var(--ink, #163c2b);
+}
