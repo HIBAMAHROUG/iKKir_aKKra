@@ -20,17 +20,20 @@ function LevelCourses() {
             { title: 'Remédiation : verbes et grammaire', detail: 'Exercices corrigés et quiz séparé sur 20 points.', path: '/courses/5eme/francais', active: true },
             { title: 'Cahier : présent de l’indicatif', detail: 'Conjugaison, exercices corrigés et quiz /20.', path: '/courses/5eme/francais/conjugaison-present', active: true },
             { title: 'Une idée géniale : environnement', detail: 'Lecture, vocabulaire, grammaire et quiz /20.', path: '/courses/5eme/francais/environnement', active: true },
+            { title: 'Modules 1 & 2 : environnement et vivre ensemble', detail: 'Lectures, exercices corrigés, mots-clés en arabe et quiz /20.', path: '/courses/5eme/francais/modules-1-2', active: true },
           ]
         : isSixth
         ? [
             { title: 'Module 1 : Le travail et les métiers', detail: 'Fiche, corrections et évaluation sur 20 points.', path: '/courses/6eme/module-1', active: true },
+          { title: 'Révision : Modules 1 & 2', detail: 'Groupe nominal, impératif, temps, verbes et quiz /20.', path: '/courses/6eme/francais/revision', active: true },
             { title: 'Cahier : présent de l’indicatif', detail: 'Conjugaison, exercices corrigés et quiz /20.', path: '/courses/6eme/francais/conjugaison-present', active: true },
-            { title: 'Module 2', detail: 'Bientôt disponible.', path: '#', active: false },
+            { title: 'Module 3 : Accepter les autres', detail: 'Respect, solidarité, grammaire, conjugaison et quiz /20.', path: '/courses/6eme/francais/accepter-les-autres', active: true },
           ]
         : [
             { title: 'Cahier : présent de l’indicatif', detail: 'Conjugaison, exercices corrigés et quiz /20.', path: '/courses/7eme/francais/conjugaison-present', active: true },
           { title: 'Cahier : passé composé et verbes pronominaux', detail: 'Cours, exercices corrigés et quiz /20.', path: '/courses/7eme/francais/passe-compose', active: true },
-            { title: 'Module 2', detail: 'Bientôt disponible.', path: '#', active: false },
+              { title: 'Rédaction : En famille', detail: 'Récit, exercices guidés et productions corrigées.', path: '/courses/7eme/francais/en-famille', active: true },
+              { title: 'Devoir de contrôle n°1', detail: 'Compréhension, langue et évaluation interactive /20.', path: '/courses/7eme/francais/devoir-controle-1', active: true },
           ],
     },
     {
@@ -48,7 +51,11 @@ function LevelCourses() {
             ...(isSixth ? [{ title: 'Unit 1 : Introducing Others', detail: 'Family, to be, to have, can and quiz.', path: '/courses/6eme/english-unit-1', active: true }] : []),
             { title: 'Unit 2 : Simple Present vs Progressive', detail: 'Lessons, exercises and assessment on 20 points.', path: '/courses/english-tenses', active: true },
             ...(isSixth ? [{ title: 'Unit 3 : My Daily Life', detail: 'Reading comprehension: Sami’s daily routine and quiz.', path: '/courses/6eme/english-reading', active: true }] : []),
+            ...(isSixth ? [{ title: 'Revision Worksheet : Simple Present', detail: 'Grammar, adverbs, WH-questions, suggestions and reading quiz /20.', path: '/courses/6eme/english/revision', active: true }] : []),
+            ...((isSixth || isSeventh) ? [{ title: 'Unit 1 : Entertaining Myself — Free Time', detail: 'Activities, adverbs of frequency, prepositions and quiz /20.', path: `/courses/${level}/english/free-time`, active: true }] : []),
             ...(isSeventh ? [{ title: 'Unit 1 : Introducing Others and Families', detail: 'Reading, family, hobbies, pronouns and quiz /20.', path: '/courses/7eme/english', active: true }] : []),
+            ...(isSeventh ? [{ title: 'Unit 2 : Communication and Travel', detail: 'Friendly letters, present progressive, airport dialogue and quiz /20.', path: '/courses/7eme/english/unit-2', active: true }] : []),
+            ...(isSeventh ? [{ title: 'Mid-Term Test 1 : 4 versions', detail: 'Language, spelling and interactive revision quiz /20.', path: '/courses/7eme/english/midterm-1', active: true }] : []),
             ...((isSixth || isSeventh) ? [{ title: 'Unit : Entertaining Myself', detail: 'Hobbies, likes, shopping, sports and quiz /20.', path: `/courses/${level}/english/hobbies`, active: true }] : []),
             ...(isSeventh ? [{ title: 'Module 1 Review', detail: '22 exercises: grammar, vocabulary, writing and quiz /20.', path: '/courses/7eme/english/module-1-review', active: true }] : []),
           ]

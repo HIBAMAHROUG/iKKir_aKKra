@@ -1,20 +1,19 @@
 .home {
-  max-width: 1100px;
+  max-width: 1220px;
   margin: 0 auto;
-  padding: 32px 24px 72px;
+  padding: 34px 28px 86px;
 }
 
 .hero {
-  aspect-ratio: 3 / 1;
-  min-height: 360px;
+  min-height: 500px;
   position: relative;
   display: flex;
   align-items: stretch;
   overflow: hidden;
-  border: 1px solid var(--line);
-  border-radius: 24px;
-  background: linear-gradient(135deg, #312e81, #4c1d95);
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  border: 1px solid #c9ded0;
+  border-radius: 28px;
+  background: var(--green-900);
+  box-shadow: 0 24px 55px rgba(15, 107, 70, 0.18);
 }
 
 .hero-image {
@@ -24,24 +23,26 @@
   height: 100%;
   object-fit: cover;
   object-position: center;
-  opacity: 0.7;
+  opacity: 0.72;
+  object-position: center 42%;
 }
 
 .hero-content {
   position: relative;
-  max-width: 52%;
+  z-index: 1;
+  max-width: 640px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 48px;
+  padding: 64px;
   color: white;
-  background: linear-gradient(90deg, rgba(30, 27, 75, 0.94), rgba(30, 27, 75, 0.18));
+  background: linear-gradient(90deg, rgba(15, 79, 54, 0.96), rgba(15, 79, 54, 0.52) 70%, transparent);
 }
 
 .eyebrow {
   margin: 0 0 10px;
-  color: var(--yellow);
-  font-family: Arial, sans-serif;
+  color: var(--green-700);
+  font-family: 'Manrope', sans-serif;
   font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.16em;
@@ -49,24 +50,51 @@
 }
 
 .hero .eyebrow {
-  color: #ffd166;
+  color: #bcefd0;
 }
 
 .hero h1 {
   margin: 0 0 16px;
-  font-size: clamp(2.6rem, 6vw, 5.5rem);
-  line-height: 0.98;
+  max-width: 590px;
+  font-family: 'Manrope', sans-serif;
+  font-size: clamp(2.5rem, 5vw, 5rem);
+  line-height: 1.02;
+  letter-spacing: -0.03em;
 }
 
 .hero p:not(.eyebrow) {
   max-width: 520px;
   margin: 0;
-  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.88);
+  font-size: 1.18rem;
+}
+
+.hero-action {
+  align-self: flex-start;
+  margin-top: 30px;
+  padding: 13px 18px;
+  border-radius: 10px;
+  color: var(--green-900);
+  background: #ffffff;
+  box-shadow: 0 10px 20px rgba(7, 55, 36, 0.18);
+  font-family: 'Manrope', sans-serif;
+  font-weight: 800;
+}
+
+.hero-action span {
+  margin-left: 12px;
+  color: var(--green-500);
+}
+
+.hero-action:hover {
+  color: var(--green-900);
+  background: var(--green-100);
+  text-decoration: none;
 }
 
 .home-intro {
-  max-width: 720px;
-  padding: 56px 0 24px;
+  max-width: 820px;
+  padding: 72px 0 24px;
 }
 
 .home-intro h2,
@@ -74,7 +102,8 @@
   margin: 0 0 12px;
   font-size: clamp(2rem, 4vw, 3.25rem);
   line-height: 1.05;
-  color: white;
+  color: var(--green-900);
+  font-family: 'Manrope', sans-serif;
 }
 
 .home-intro p,
@@ -87,23 +116,24 @@
 .level-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-  margin-top: 28px;
+  gap: 18px;
+  margin-top: 30px;
 }
 
 .level-card {
   display: block;
-  padding: 24px;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 18px;
-  color: white;
-  background: rgba(255, 255, 255, 0.1);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  padding: 26px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  color: var(--ink);
+  background: #ffffff;
+  box-shadow: 0 12px 28px rgba(15, 107, 70, 0.09);
   transition: transform 180ms ease, background 180ms ease;
 }
 
 .level-card:hover {
-  background: linear-gradient(145deg, rgba(250, 204, 21, 0.3), rgba(236, 72, 153, 0.2));
+  border-color: #9ed9b9;
+  background: var(--green-100);
   text-decoration: none;
   transform: translateY(-4px);
 }
@@ -114,13 +144,14 @@
 }
 
 .level-card strong {
+  color: var(--green-900);
+  font-family: 'Manrope', sans-serif;
   font-size: 1.35rem;
 }
 
 .level-card span {
   margin-top: 6px;
-  color: rgba(255, 255, 255, 0.75);
-  font-family: Arial, sans-serif;
+  color: var(--muted);
   font-size: 0.9rem;
 }
 
@@ -135,15 +166,17 @@
   margin-top: 28px;
   padding: 12px 20px;
   color: white;
-  border-radius: 14px;
-  background: linear-gradient(145deg, #10b981, #059669);
-  box-shadow: 0 8px 20px rgba(16, 185, 129, 0.4);
+  border-radius: 10px;
+  background: var(--green-700);
+  box-shadow: 0 8px 20px rgba(15, 107, 70, 0.22);
+  font-family: 'Manrope', sans-serif;
+  font-weight: 800;
 }
 
 .button-link:hover {
   color: white;
   text-decoration: none;
-  background: linear-gradient(145deg, #34d399, #10b981);
+  background: var(--green-500);
 }
 
 @media (max-width: 700px) {
@@ -152,13 +185,14 @@
   }
 
   .hero {
-    aspect-ratio: 16 / 9;
-    min-height: 0;
+    min-height: 580px;
   }
 
   .hero-content {
-    max-width: 75%;
-    padding: 28px 24px;
+    max-width: 100%;
+    justify-content: flex-end;
+    padding: 28px 24px 36px;
+    background: linear-gradient(0deg, rgba(15, 79, 54, 0.96), rgba(15, 79, 54, 0.18));
   }
 
   .level-grid {

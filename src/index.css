@@ -1,15 +1,19 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Source+Sans+3:wght@400;500;600;700&display=swap');
 
 :root {
-  --ink: #ffffff;
-  --muted: rgba(255, 255, 255, 0.78);
-  --paper: #1e1b4b;
-  --cream: rgba(255, 255, 255, 0.1);
-  --coral: #ec4899;
-  --line: rgba(255, 255, 255, 0.15);
-  --yellow: #facc15;
-  --cyan: #06b6d4;
-  font-family: 'Poppins', sans-serif;
+  --ink: #163c2b;
+  --muted: #5a7467;
+  --paper: #f5f0e6;
+  --cream: #ffffff;
+  --green-900: #0f4f36;
+  --green-700: #0f6b46;
+  --green-500: #19a968;
+  --green-100: #dff3e7;
+  --line: #d8e5dc;
+  --yellow: #e4a72c;
+  --coral: #19a968;
+  --cyan: #5fcf96;
+  font-family: 'Source Sans 3', sans-serif;
   color: var(--ink);
   background: var(--paper);
   font-synthesis: none;
@@ -24,19 +28,18 @@
 body {
   margin: 0;
   min-width: 320px;
-  background: linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #4c1d95 100%);
-  background-attachment: fixed;
+  background: var(--paper);
   line-height: 1.7;
 }
 
 a {
-  color: var(--yellow);
+  color: var(--green-700);
   text-decoration: none;
   transition: color 0.2s;
 }
 
 a:hover {
-  color: #fde047;
+  color: var(--green-900);
 }
 
 #root {

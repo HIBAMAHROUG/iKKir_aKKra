@@ -14,7 +14,7 @@ function Navbar() {
     <header className="site-header">
       <nav className="navbar" aria-label="Navigation principale">
         <NavLink className="brand" to="/" end>
-          Ikkir <span>Akkra</span>
+          <img src="/logo.png.png" alt="Ikkir Akkra" />
         </NavLink>
         <div className="nav-links">
           {links.map((link) => (

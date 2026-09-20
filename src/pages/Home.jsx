@@ -18,9 +18,10 @@ function Home() {
           alt="Élèves réunis et souriants"
         />
         <div className="hero-content">
-          <p className="eyebrow">Ikkir Akkra</p>
+          <p className="eyebrow">Plateforme éducative</p>
           <h1 id="hero-title">Apprendre ensemble, progresser chaque jour.</h1>
           <p>Un espace simple pour retrouver vos cours, réviser et avancer avec confiance.</p>
+          <Link className="hero-action" to="/courses">Explorer les cours <span aria-hidden="true">→</span></Link>
         </div>
       </section>
 
