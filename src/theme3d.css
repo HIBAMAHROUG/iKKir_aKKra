@@ -1,0 +1,137 @@
+/* ===== Thème 3D : relief, profondeur, boutons "enfonçables" ===== */
+:root {
+  --c3-ink: #163c2b;
+  --c3-green: #1f7a4d;
+  --c3-green-dark: #0f4d2f;
+  --c3-mint: #e3f1e8;
+  --c3-line: #c5dfcf;
+  --c3-edge: rgba(8, 45, 27, 0.38);
+  --c3-side: #cfe1d6;
+  --c3-orange: #e4a72c;
+  --c3-raised: 0 5px 0 var(--c3-side), 0 14px 22px rgba(22, 60, 43, 0.14), 0 26px 44px rgba(22, 60, 43, 0.1);
+}
+
+/* ---------- Barre de navigation ---------- */
+.site-header {
+  box-shadow: 0 4px 0 rgba(22, 60, 43, 0.06), 0 14px 30px rgba(22, 60, 43, 0.14);
+}
+.nav-links a {
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+.nav-links a:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 0 var(--c3-side);
+}
+.nav-links a.active {
+  box-shadow: inset 0 3px 6px rgba(22, 60, 43, 0.22), 0 2px 0 rgba(255, 255, 255, 0.9);
+}
+
+/* ---------- Cartes de niveaux, cours et modules (relief) ---------- */
+.form-card, .level-card, .subject-card, .info-item, .info-level {
+  background: linear-gradient(180deg, #ffffff 0%, #f1f7f3 100%);
+  border: 1px solid var(--c3-line);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.95) inset, var(--c3-raised);
+  transform-style: preserve-3d;
+  transition: transform 0.18s ease-out, box-shadow 0.18s ease-out;
+}
+.tilt-3d.is-tilting {
+  transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) translateY(-6px) !important;
+  box-shadow: 0 9px 0 var(--c3-side), 0 30px 46px rgba(22, 60, 43, 0.24) !important;
+}
+.tilt-3d.is-tilting > * {
+  transform: translateZ(22px);
+}
+.tilt-3d > * {
+  transition: transform 0.18s ease-out;
+}
+
+/* ---------- Cartes des pages À propos, Contact, Connexion ---------- */
+.info-hero,
+.info-card,
+.auth-card,
+.info-steps li,
+.contact-list li {
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.9) inset, var(--c3-raised);
+}
+
+/* ---------- Boutons : bord épais qui s'enfonce au clic ---------- */
+:is(a, button)[class*="-button"],
+.button-link,
+a[class*="-quiz-link"],
+.auth-nav__cta {
+  box-shadow: 0 5px 0 var(--c3-edge), 0 12px 18px rgba(22, 60, 43, 0.22);
+  transform: translateY(0);
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+:is(a, button)[class*="-button"]:hover,
+.button-link:hover,
+a[class*="-quiz-link"]:hover,
+.auth-nav__cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 7px 0 var(--c3-edge), 0 16px 24px rgba(22, 60, 43, 0.26);
+}
+:is(a, button)[class*="-button"]:active,
+.button-link:active,
+a[class*="-quiz-link"]:active,
+.auth-nav__cta:active {
+  transform: translateY(4px);
+  box-shadow: 0 1px 0 var(--c3-edge), 0 3px 6px rgba(22, 60, 43, 0.2);
+}
+:is(a, button)[class*="-button"]:disabled {
+  transform: none;
+  box-shadow: 0 2px 0 var(--c3-edge);
+}
+button[class*="qz-"] {
+  box-shadow: 0 4px 0 var(--c3-edge);
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+button[class*="qz-"]:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 var(--c3-edge);
+}
+button[class*="qz-"]:active:not(:disabled) {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 var(--c3-edge);
+}
+
+/* ---------- Pages de leçons : sections en relief ---------- */
+.lesson-section, .quiz-section, .present-section, .tense-section, .tense-quiz,
+.english-section, .english-quiz, .seventh-section, .fifth-section,
+.reading-section, .reading-quiz, .fourth-section, .environment-section {
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.9) inset, var(--c3-raised);
+}
+
+/* Petites pastilles (conjugaisons, vocabulaire, tableaux) */
+.conjugation-grid span, .adjective-grid span, .ending-grid span,
+.grammar-table span, .grammar-table div, .word-grid span,
+.tense-cards span, .time-cards span, .number-strip span, .arabic-grid span,
+.vocabulary-review span, .seventh-table span, .job-grid span, .time-grid span {
+  box-shadow: 0 3px 0 var(--c3-side), 0 8px 12px rgba(22, 60, 43, 0.1);
+}
+
+/* Champs de réponse : effet "creusé" */
+input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]),
+textarea {
+  box-shadow: inset 0 3px 6px rgba(22, 60, 43, 0.14), 0 1px 0 #ffffff;
+}
+
+/* ---------- Pied de page ---------- */
+.site-footer {
+  border-top: 6px solid var(--c3-green);
+  box-shadow: 0 -10px 30px rgba(22, 60, 43, 0.18);
+}
+
+/* ---------- Accessibilité ---------- */
+:is(a, button):focus-visible {
+  outline: 3px solid var(--c3-orange);
+  outline-offset: 3px;
+}
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+  .tilt-3d.is-tilting {
+    transform: none !important;
+  }
+}
