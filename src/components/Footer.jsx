@@ -1,10 +1,13 @@
 import { Link } from 'react-router-dom';
 
 import { contact } from '../contactInfo';
+import { useI18n } from '../i18n/useI18n';
 import './SiteFooter.css';
 
 export default function Footer() {
+  const { t } = useI18n();
   const year = new Date().getFullYear();
+  const name = t('teacher.inline');
 
   return (
     <footer className="site-footer">
@@ -12,45 +15,45 @@ export default function Footer() {
         <div className="site-footer__brand">
           
           <h2>Ikkir Akkra</h2>
-          <p>Apprendre ensemble, progresser chaque jour.</p>
-          <p className="site-footer__note">Cours de français et d’anglais avec exercices corrigés et quiz.</p>
+          <p>{t('footer.tagline')}</p>
+          <p className="site-footer__note">{t('footer.note')}</p>
         </div>
 
-        <nav aria-label="Navigation">
-          <h3>Navigation</h3>
+        <nav aria-label={t('footer.navigation')}>
+          <h3>{t('footer.navigation')}</h3>
           <ul>
-            <li><Link to="/">Accueil</Link></li>
-            <li><Link to="/courses">Cours</Link></li>
-            <li><Link to="/levels">Niveaux</Link></li>
-            <li><Link to="/about">À propos</Link></li>
-            <li><Link to="/contact">Contact</Link></li>
+            <li><Link to="/">{t('nav.home')}</Link></li>
+            <li><Link to="/courses">{t('nav.courses')}</Link></li>
+            <li><Link to="/levels">{t('nav.levels')}</Link></li>
+            <li><Link to="/about">{t('nav.about')}</Link></li>
+            <li><Link to="/contact">{t('nav.contact')}</Link></li>
           </ul>
         </nav>
 
-        <nav aria-label="Niveaux">
-          <h3>Niveaux</h3>
+        <nav aria-label={t('footer.levels')}>
+          <h3>{t('footer.levels')}</h3>
           <ul>
-            <li><Link to="/courses/5eme">5ème</Link></li>
-            <li><Link to="/courses/6eme">6ème</Link></li>
-            <li><Link to="/courses/7eme">7ème</Link></li>
+            <li><Link to="/courses/5eme">{t('level.5')}</Link></li>
+            <li><Link to="/courses/6eme">{t('level.6')}</Link></li>
+            <li><Link to="/courses/7eme">{t('level.7')}</Link></li>
           </ul>
         </nav>
 
         <div>
-          <h3>Contact</h3>
+          <h3>{t('footer.contact')}</h3>
           <ul>
             <li><a href={`mailto:${contact.email}`}>{contact.email}</a></li>
             <li>
               <a href={contact.facebook} target="_blank" rel="noopener noreferrer">Facebook</a>
             </li>
-            <li><Link to="/contact">Écrire à {contact.name}</Link></li>
+            <li><Link to="/contact">{t('footer.writeTo', { name })}</Link></li>
           </ul>
         </div>
       </div>
 
       <div className="site-footer__bottom">
-        <p>© {year} Ikkir Akkra. Tous droits réservés.</p>
-        <p>Créé avec ❤️ par {contact.name}</p>
+        <p>{t('footer.rights', { year })}</p>
+        <p>{t('footer.madeBy', { name })}</p>
       </div>
     </footer>
   );

@@ -2,10 +2,12 @@ import { useMemo } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../auth/useAuth';
 import { getResults } from '../db/results';
+import { useI18n } from '../i18n/useI18n';
 import './Auth.css';
 
 export default function Profile() {
   const { user, logout, deleteAccount } = useAuth();
+  const { t, locale } = useI18n();
   const navigate = useNavigate();
   const results = useMemo(() => (user ? getResults(user.id) : []), [user]);
 
@@ -15,7 +17,7 @@ export default function Profile() {
   };
 
   const handleDelete = () => {
-    if (window.confirm('Supprimer ton compte et tous tes résultats ? Cette action est définitive.')) {
+    if (window.confirm(t('profile.confirmDelete'))) {
       deleteAccount();
       navigate('/');
     }
@@ -24,32 +26,36 @@ export default function Profile() {
   return (
     <main className="auth-page auth-page--wide">
       <section className="auth-card">
-        <h1>Bonjour {user.name} 👋</h1>
+        <h1>{t('profile.hello', { name: user.name })}</h1>
         <p className="auth-lead">{user.email}</p>
         <div className="auth-actions">
-          <Link className="auth-button" to="/courses">Continuer mes cours</Link>
+          <Link className="auth-button" to="/courses">{t('profile.continue')}</Link>
           <button type="button" className="auth-button auth-button--alt" onClick={handleLogout}>
-            Déconnexion
+            {t('profile.logout')}
           </button>
         </div>
       </section>
 
       <section className="auth-card">
-        <h2>Mes résultats de quiz</h2>
+        <h2>{t('profile.results')}</h2>
         {results.length === 0 ? (
-          <p className="auth-lead">Aucun résultat pour l’instant. Passe un quiz pour le voir apparaître ici.</p>
+          <p className="auth-lead">{t('profile.noResults')}</p>
         ) : (
           <div className="auth-table-wrap">
             <table className="auth-table">
               <thead>
-                <tr><th>Quiz</th><th>Score</th><th>Date</th></tr>
+                <tr>
+                  <th>{t('profile.colQuiz')}</th>
+                  <th>{t('profile.colScore')}</th>
+                  <th>{t('profile.colDate')}</th>
+                </tr>
               </thead>
               <tbody>
                 {results.map((r) => (
                   <tr key={r.id}>
                     <td>{r.quiz}</td>
                     <td>{r.score} / {r.total}</td>
-                    <td>{new Date(r.createdAt).toLocaleDateString('fr-FR')}</td>
+                    <td>{new Date(r.createdAt).toLocaleDateString(locale)}</td>
                   </tr>
                 ))}
               </tbody>
@@ -59,10 +65,10 @@ export default function Profile() {
       </section>
 
       <section className="auth-card auth-danger">
-        <h2>Zone sensible</h2>
-        <p className="auth-lead">Supprime ton compte et toutes les données enregistrées sur cet appareil.</p>
+        <h2>{t('profile.danger')}</h2>
+        <p className="auth-lead">{t('profile.dangerText')}</p>
         <button type="button" className="auth-button auth-button--danger" onClick={handleDelete}>
-          Supprimer mon compte
+          {t('profile.delete')}
         </button>
       </section>
     </main>

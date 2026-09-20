@@ -5,6 +5,7 @@ import Navbar from './components/Navbar'
 import Home from './pages/Home'
 import LevelCourses from './pages/LevelCourses'
 import SimplePage from './pages/SimplePage'
+import { LevelsPage, NotFound, Loading } from './pages/TranslatedPages'
 import ProtectedRoute from './auth/ProtectedRoute'
 import './App.css'
 
@@ -61,7 +62,7 @@ function App() {
     <BrowserRouter>
       <Navbar />
       <main>
-        <Suspense fallback={<p className="route-loading" role="status">Chargement...</p>}>
+        <Suspense fallback={<Loading />}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/courses/6eme/module-1" element={<ModuleSix />} />
@@ -108,13 +109,13 @@ function App() {
           <Route path="/levels/6eme" element={<ModuleSix />} />
           <Route path="/courses" element={<Courses />} />
           <Route path="/courses/:level" element={<LevelCourses />} />
-          <Route path="/levels" element={<SimplePage title="Niveaux" text="Choisissez votre niveau pour commencer vos révisions." />} />
+          <Route path="/levels" element={<LevelsPage />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/about" element={<About />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
-          <Route path="*" element={<SimplePage title="Page introuvable" text="Cette adresse ne correspond à aucune page." />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
         </Suspense>
       </main>

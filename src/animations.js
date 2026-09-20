@@ -1,4 +1,9 @@
 const STORE_KEY = 'ikkir:anim';
+const LABELS = {
+  fr: ['Animations ON', 'Animations OFF'],
+  en: ['Animations ON', 'Animations OFF'],
+  ar: ['الحركات شغّالة', 'الحركات مطفيّة'],
+};
 const REVEAL = '.lesson-section, .quiz-section, .present-section, .tense-section, .tense-quiz, .english-section, .english-quiz, .seventh-section, .fifth-section, .reading-section, .reading-quiz, .fourth-section, .environment-section, .conjugation-grid span, .adjective-grid span, .ending-grid span, .grammar-table span, .grammar-table div, .word-grid span, .tense-cards span, .time-cards span, .number-strip span, .arabic-grid span, .vocabulary-review span, .seventh-table span, .job-grid span, .time-grid span, .form-card, .level-card, .subject-card, .info-item, .info-level, .auth-card, .info-card, .info-hero, [class$="-score"], .score-box, .__none__, [class$="-correction"], .correction, .__none__, .info-steps li, .contact-list li, .site-footer__inner > *, .dialogue, .reading-story, .environment-story, .seventh-reading';
 const POP = '.conjugation-grid span, .adjective-grid span, .ending-grid span, .grammar-table span, .grammar-table div, .word-grid span, .tense-cards span, .time-cards span, .number-strip span, .arabic-grid span, .vocabulary-review span, .seventh-table span, .job-grid span, .time-grid span, [class$="-score"], .score-box, .__none__, .info-item, .info-level';
 const SCORE = '[class$="-score"], .score-box, .__none__';
@@ -156,7 +161,7 @@ function initToggle() {
   const paint = () => {
     const on = enabled();
     btn.setAttribute('aria-pressed', String(on));
-    btn.textContent = `\u{1F388} Animations ${on ? 'ON' : 'OFF'}`;
+    btn.textContent = `\u{1F388} ${(LABELS[document.documentElement.lang] || LABELS.fr)[on ? 0 : 1]}`;
   };
   btn.addEventListener('click', () => {
     root.dataset.anim = enabled() ? 'off' : 'on';
@@ -165,6 +170,7 @@ function initToggle() {
     if (enabled()) prepare(document.body);
   });
   paint();
+  new MutationObserver(paint).observe(root, { attributes: true, attributeFilter: ['lang'] });
   document.body.appendChild(btn);
 }
 

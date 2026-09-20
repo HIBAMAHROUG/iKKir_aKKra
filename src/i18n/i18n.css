@@ -1,0 +1,51 @@
+/* ===== Sélecteur de langue ===== */
+.lang-switch {
+  display: inline-flex;
+  gap: 4px;
+  padding: 4px;
+  margin-inline-start: 12px;
+  border-radius: 999px;
+  background: #e3f1e8;
+  border: 1px solid #c5dfcf;
+}
+.lang-switch button {
+  padding: 6px 12px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: #163c2b;
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+.lang-switch button:hover:not([aria-pressed="true"]) { background: #ffffff; }
+.lang-switch button[aria-pressed="true"] {
+  background: #1f7a4d;
+  color: #ffffff;
+  box-shadow: 0 3px 0 rgba(8, 45, 27, 0.35);
+}
+.lang-switch button:focus-visible { outline: 3px solid #e4a72c; outline-offset: 2px; }
+
+/* La barre peut passer sur 2 lignes si elle est trop chargée */
+.navbar { flex-wrap: wrap; row-gap: 8px; }
+.nav-links { flex-wrap: wrap; }
+
+/* ===== Arabe : police lisible + droite vers gauche ===== */
+html[lang="ar"] body,
+html[lang="ar"] :is(h1, h2, h3, h4, a, p, li, span, label, td, th, button, input, textarea) {
+  font-family: 'Cairo', 'Segoe UI', Tahoma, Arial, sans-serif;
+}
+html[lang="ar"] { line-height: 1.75; }
+html[lang="ar"] .info-eyebrow,
+html[lang="ar"] .contact-label,
+html[lang="ar"] .site-footer h3 { letter-spacing: 0; }
+
+/* Le contenu des leçons (français / anglais) garde son sens de lecture */
+html[dir="rtl"] :is(.lesson-section, .quiz-section, .present-section, .tense-section, .tense-quiz, .english-section, .english-quiz, .seventh-section, .fifth-section, .reading-section, .reading-quiz, .fourth-section, .environment-section, .module-heading, .present-heading, .tenses-heading, .english-heading, .seventh-heading, .fifth-heading, .reading-heading, .fourth-heading, .environment-heading) {
+  direction: ltr;
+  text-align: left;
+}
+
+/* Éléments fixes : passent de l'autre côté en arabe */
+html[dir="rtl"] .anim-toggle { left: auto; right: 16px; }

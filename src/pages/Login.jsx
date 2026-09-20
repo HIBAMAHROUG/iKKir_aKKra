@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../auth/useAuth';
+import { useI18n } from '../i18n/useI18n';
 import './Auth.css';
 
 export default function Login() {
   const { user, login } = useAuth();
+  const { t } = useI18n();
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from || '/profile';
@@ -34,24 +36,24 @@ export default function Login() {
   return (
     <main className="auth-page">
       <section className="auth-card">
-        <h1>Connexion</h1>
-        <p className="auth-lead">Retrouve ta progression et tes résultats de quiz.</p>
+        <h1>{t('login.title')}</h1>
+        <p className="auth-lead">{t('login.lead')}</p>
         <form className="auth-form" onSubmit={submit}>
           <label>
-            Email
+            {t('login.email')}
             <input type="email" name="email" value={form.email} onChange={update} required autoComplete="email" />
           </label>
           <label>
-            Mot de passe
+            {t('login.password')}
             <input type="password" name="password" value={form.password} onChange={update} required autoComplete="current-password" />
           </label>
-          {error && <p className="auth-error" role="alert">{error}</p>}
+          {error && <p className="auth-error" role="alert">{t(error)}</p>}
           <button className="auth-button" type="submit" disabled={busy}>
-            {busy ? 'Connexion...' : 'Se connecter'}
+            {busy ? t('login.busy') : t('login.submit')}
           </button>
         </form>
         <p className="auth-switch">
-          Pas encore de compte ? <Link to="/register">Créer un compte</Link>
+          {t('login.noAccount')} <Link to="/register">{t('login.createLink')}</Link>
         </p>
       </section>
     </main>

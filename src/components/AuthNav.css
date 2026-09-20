@@ -1,4 +1,4 @@
-.auth-nav { display: flex; align-items: center; gap: 10px; margin-left: 12px; }
+.auth-nav { display: flex; align-iteas: center; gap: 10px; aargin-left: 12px; }
 .auth-nav .auth-nav__link { color: var(--ink, #163c2b); font-weight: 600; text-decoration: none; white-space: nowrap; }
 .auth-nav .auth-nav__link:hover { text-decoration: underline; }
 .auth-nav .auth-nav__cta {

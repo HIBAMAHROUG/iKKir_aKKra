@@ -1,94 +1,86 @@
 import { Link } from 'react-router-dom';
 import { contact } from '../contactInfo';
+import { useI18n } from '../i18n/useI18n';
 import './InfoPages.css';
 
 const features = [
-  { icon: '📚', title: 'Des cours clairs', text: 'Des leçons de français et d’anglais organisées par module, avec des explications simples et des exemples.' },
-  { icon: '✍️', title: 'Des exercices corrigés', text: 'Chaque leçon propose des exercices avec leur correction pour comprendre ses erreurs et progresser.' },
-  { icon: '🎯', title: 'Des quiz interactifs', text: 'Teste-toi à la fin de chaque module et vois tout de suite ton score.' },
-  { icon: '🌍', title: 'Un coup de pouce en arabe', text: 'Dans les leçons d’anglais, le vocabulaire important est traduit en arabe pour mieux retenir.' },
+  { icon: '\u{1F4DA}', k: 'about.f1' },
+  { icon: '\u270D\uFE0F', k: 'about.f2' },
+  { icon: '\u{1F3AF}', k: 'about.f3' },
+  { icon: '\u{1F30D}', k: 'about.f4' },
 ];
 
 const levels = [
-  { to: '/courses/5eme', label: '5ème', text: 'Français et anglais' },
-  { to: '/courses/6eme', label: '6ème', text: 'Français et anglais' },
-  { to: '/courses/7eme', label: '7ème', text: 'Français et anglais' },
+  { to: '/courses/5eme', k: 'level.5' },
+  { to: '/courses/6eme', k: 'level.6' },
+  { to: '/courses/7eme', k: 'level.7' },
 ];
 
-const steps = [
-  'Choisis ton niveau, puis le module que tu veux réviser.',
-  'Lis la leçon et fais les exercices à ton rythme.',
-  'Consulte la correction, puis passe le quiz pour vérifier ce que tu as retenu.',
-];
+const steps = ['about.step1', 'about.step2', 'about.step3'];
 
 export default function About() {
+  const { t } = useI18n();
+  const name = t('teacher.inline');
+
   return (
     <main className="info-page">
       <section className="info-hero">
-        <p className="info-eyebrow">À propos</p>
-        <h1>Ikkir Akkra, apprendre ensemble</h1>
-        <p>
-          Ikkir Akkra est une plateforme éducative gratuite qui aide les élèves à réviser le français et
-          l’anglais avec des leçons simples, des exercices corrigés et des quiz.
-        </p>
+        <p className="info-eyebrow">{t('about.eyebrow')}</p>
+        <h1>{t('about.title')}</h1>
+        <p>{t('about.intro')}</p>
       </section>
 
       <section className="info-section">
-        <h2>Notre mission</h2>
+        <h2>{t('about.missionTitle')}</h2>
         <div className="info-card">
-          <p>
-            Rendre l’apprentissage accessible à tous les élèves. Nous croyons que l’on progresse mieux
-            en avançant pas à pas, en s’entraînant régulièrement et en comprenant ses erreurs.
-          </p>
-          <p>
-            Le nom « Ikkir Akkra » exprime cette idée : apprendre, réviser et grandir ensemble, chaque jour.
-          </p>
+          <p>{t('about.mission1')}</p>
+          <p>{t('about.mission2')}</p>
         </div>
       </section>
 
       <section className="info-section">
-        <h2>Ce que tu trouveras ici</h2>
+        <h2>{t('about.featuresTitle')}</h2>
         <div className="info-grid">
           {features.map((f) => (
-            <article className="info-item" key={f.title}>
+            <article className="info-item" key={f.k}>
               <div className="info-icon" aria-hidden="true">{f.icon}</div>
-              <h3>{f.title}</h3>
-              <p>{f.text}</p>
+              <h3>{t(`${f.k}.title`)}</h3>
+              <p>{t(`${f.k}.text`)}</p>
             </article>
           ))}
         </div>
       </section>
 
       <section className="info-section">
-        <h2>Nos niveaux</h2>
+        <h2>{t('about.levelsTitle')}</h2>
         <div className="info-levels">
           {levels.map((l) => (
             <Link className="info-level" to={l.to} key={l.to}>
-              {l.label}
-              <small>{l.text}</small>
+              {t(l.k)}
+              <small>{t('level.text')}</small>
             </Link>
           ))}
         </div>
       </section>
 
       <section className="info-section">
-        <h2>Comment ça marche</h2>
+        <h2>{t('about.howTitle')}</h2>
         <ol className="info-steps">
           {steps.map((s) => (
-            <li key={s}>{s}</li>
+            <li key={s}>{t(s)}</li>
           ))}
         </ol>
       </section>
 
       <section className="info-section">
-        <h2>Qui est derrière Ikkir Akkra ?</h2>
+        <h2>{t('about.whoTitle')}</h2>
         <div className="info-card info-author">
-          <div className="info-avatar" aria-hidden="true">AH</div>
+          <div className="info-avatar" aria-hidden="true">{'\u{1F469}\u200D\u{1F3EB}'}</div>
           <div>
-            <p><strong>{contact.name}</strong></p>
-            <p>Créatrice de la plateforme. Tes remarques et tes idées sont les bienvenues.</p>
+            <p><strong>{t('teacher.name')}</strong></p>
+            <p>{t('about.whoText')}</p>
             <div className="info-actions">
-              <Link className="info-button" to="/contact">Contacter {contact.name}</Link>
+              <Link className="info-button" to="/contact">{t('common.contactTeacher', { name })}</Link>
               <a className="info-button info-button--alt" href={contact.facebook} target="_blank" rel="noopener noreferrer">
                 Facebook
               </a>
