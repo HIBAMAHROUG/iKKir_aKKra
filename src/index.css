@@ -302,8 +302,3 @@ a:hover {
   background: var(--green-500);
 }
 
-/* Correctif lisibilite */
-:root { color-scheme: light; }
-body { color: #1f2933; background: #f8fafc; }
-h1, h2, h3, h4 { color: #173f5f; }
-p, li, span { color: inherit; opacity: 1; }
