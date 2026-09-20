@@ -1,0 +1,159 @@
+/* ================= Animations pour enfants ================= */
+
+@keyframes page-in { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
+@keyframes reveal-up { from { opacity: 0; transform: translateY(36px) scale(0.96); } to { opacity: 1; transform: none; } }
+@keyframes reveal-pop {
+  0% { opacity: 0; transform: scale(0.4) rotate(-6deg); }
+  70% { opacity: 1; transform: scale(1.1) rotate(2deg); }
+  100% { opacity: 1; transform: none; }
+}
+@keyframes title-pop {
+  0% { opacity: 0; transform: translateY(-16px) scale(0.85); }
+  60% { opacity: 1; transform: translateY(4px) scale(1.04); }
+  100% { opacity: 1; transform: none; }
+}
+@keyframes wiggle { 0%, 100% { transform: rotate(0); } 25% { transform: rotate(-6deg); } 75% { transform: rotate(6deg); } }
+@keyframes hop { 0%, 100% { transform: translateY(0); } 40% { transform: translateY(-9px); } 70% { transform: translateY(0); } 85% { transform: translateY(-3px); } }
+@keyframes jelly {
+  0% { transform: scale(1); }
+  30% { transform: scale(1.16, 0.88); }
+  50% { transform: scale(0.94, 1.1); }
+  70% { transform: scale(1.05, 0.97); }
+  100% { transform: scale(1); }
+}
+@keyframes shake { 0%, 100% { transform: translateX(0); } 20% { transform: translateX(-9px); } 40% { transform: translateX(8px); } 60% { transform: translateX(-6px); } 80% { transform: translateX(4px); } }
+@keyframes correct-pop { 0% { transform: scale(1); } 35% { transform: scale(1.09) rotate(-1.5deg); } 60% { transform: scale(0.97); } 100% { transform: scale(1); } }
+@keyframes glow-green { 0% { box-shadow: 0 0 0 0 rgba(31, 122, 77, 0.55); } 100% { box-shadow: 0 0 0 24px rgba(31, 122, 77, 0); } }
+@keyframes glow-red { 0% { box-shadow: 0 0 0 0 rgba(161, 38, 38, 0.4); } 100% { box-shadow: 0 0 0 18px rgba(161, 38, 38, 0); } }
+@keyframes float-y { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
+@keyframes drift {
+  from { transform: translate3d(0, 110vh, 0) rotate(0deg); }
+  to { transform: translate3d(var(--sway, 40px), -20vh, 0) rotate(360deg); }
+}
+@keyframes pulse-ring {
+  0% { box-shadow: 0 5px 0 var(--c3-edge, rgba(8, 45, 27, 0.38)), 0 0 0 0 rgba(228, 167, 44, 0.65); }
+  70% { box-shadow: 0 5px 0 var(--c3-edge, rgba(8, 45, 27, 0.38)), 0 0 0 18px rgba(228, 167, 44, 0); }
+  100% { box-shadow: 0 5px 0 var(--c3-edge, rgba(8, 45, 27, 0.38)), 0 0 0 0 rgba(228, 167, 44, 0); }
+}
+@keyframes pulse-soft { 0%, 100% { opacity: 0.45; } 50% { opacity: 1; } }
+@keyframes focus-pulse { from { box-shadow: 0 0 0 0 rgba(31, 122, 77, 0.45); } to { box-shadow: 0 0 0 10px rgba(31, 122, 77, 0); } }
+@keyframes bar-shift { from { background-position: 0% 50%; } to { background-position: 200% 50%; } }
+
+/* ---------- Pages ---------- */
+main { animation: page-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) backwards; }
+main h1 { animation: title-pop 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.1s backwards; }
+main h2:hover, main h3:hover { animation: wiggle 0.6s ease-in-out; }
+.route-loading { animation: pulse-soft 1.2s ease-in-out infinite; }
+
+/* ---------- Scroll reveal (classes ajoutees par animations.js) ---------- */
+.reveal:not(.is-visible) { opacity: 0; }
+.reveal.is-visible {
+  animation: reveal-up 0.65s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+  animation-delay: calc(var(--i, 0) * 70ms);
+}
+.reveal--pop.is-visible {
+  animation-name: reveal-pop;
+  animation-duration: 0.55s;
+  animation-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ---------- Accueil ---------- */
+.hero-content > * { animation: reveal-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) backwards; }
+.hero-content > *:nth-child(1) { animation-delay: 0.1s; }
+.hero-content > *:nth-child(2) { animation-delay: 0.22s; }
+.hero-content > *:nth-child(3) { animation-delay: 0.34s; }
+.hero-content > *:nth-child(4) { animation-delay: 0.46s; }
+.hero-content > *:nth-child(5) { animation-delay: 0.58s; }
+.hero .button-link { animation: pulse-ring 2.2s ease-out 1.2s infinite; }
+.hero .button-link:hover, .hero .button-link:active { animation: none; }
+
+/* ---------- Navigation ---------- */
+.brand img { animation: float-y 3.4s ease-in-out infinite; }
+.brand:hover img { animation: wiggle 0.6s ease-in-out; }
+.nav-links a:hover { animation: hop 0.45s ease-out; }
+.auth-nav__cta:hover { animation: jelly 0.5s ease-out; }
+
+/* ---------- Lecons ---------- */
+.conjugation-grid span, .adjective-grid span, .ending-grid span, .grammar-table span, .grammar-table div, .word-grid span, .tense-cards span, .time-cards span, .number-strip span, .arabic-grid span, .vocabulary-review span, .seventh-table span, .job-grid span, .time-grid span { cursor: default; }
+:is(.conjugation-grid span, .adjective-grid span, .ending-grid span, .grammar-table span, .grammar-table div, .word-grid span, .tense-cards span, .time-cards span, .number-strip span, .arabic-grid span, .vocabulary-review span, .seventh-table span, .job-grid span, .time-grid span):hover { animation: jelly 0.55s ease-out; }
+input:focus, textarea:focus { animation: focus-pulse 0.7s ease-out; }
+details[open] > :not(summary) { animation: reveal-up 0.4s ease-out backwards; }
+
+/* ---------- Quiz ---------- */
+.qz-option, .qz-option--right, .__none__ { transition: transform 0.15s ease; }
+:is(.qz-option, .qz-option--right, .__none__):hover { animation: jelly 0.5s ease-out; }
+label:has(input:checked) { animation: correct-pop 0.4s ease-out; }
+:is(.correct, .is-correct, .qz-feedback--ok, .__none__) { animation: correct-pop 0.6s ease-out, glow-green 0.9s ease-out; }
+:is(.incorrect, .is-incorrect, .is-wrong, .qz-option--wrong, .wrong, .__none__) { animation: shake 0.5s ease-in-out, glow-red 0.7s ease-out; }
+
+/* ---------- Barre de progression de lecture ---------- */
+#scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 6px;
+  z-index: 2000;
+  transform-origin: 0 50%;
+  transform: scaleX(0);
+  border-radius: 0 6px 6px 0;
+  background: linear-gradient(90deg, #1f7a4d, #e4a72c, #0e7490, #1f7a4d);
+  background-size: 200% 100%;
+  animation: bar-shift 4s linear infinite;
+  pointer-events: none;
+}
+
+/* ---------- Decor flottant ---------- */
+.kid-bg { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
+.kid-bg span {
+  position: absolute;
+  top: 0;
+  left: var(--x, 50%);
+  font-size: var(--size, 28px);
+  opacity: 0.17;
+  animation: drift var(--dur, 30s) linear var(--delay, 0s) infinite;
+  will-change: transform;
+}
+
+/* ---------- Confettis ---------- */
+.confetti-piece { position: fixed; left: 0; top: 0; z-index: 3000; pointer-events: none; will-change: transform, opacity; }
+
+/* ---------- Bouton Animations ON/OFF ---------- */
+.anim-toggle {
+  position: fixed;
+  left: 16px;
+  bottom: 16px;
+  z-index: 2000;
+  padding: 9px 16px;
+  border: 2px solid #1f7a4d;
+  border-radius: 999px;
+  background: #ffffff;
+  color: #163c2b;
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 0 rgba(8, 45, 27, 0.3), 0 10px 18px rgba(22, 60, 43, 0.18);
+}
+.anim-toggle:hover { transform: translateY(-2px); }
+.anim-toggle:active { transform: translateY(3px); box-shadow: 0 1px 0 rgba(8, 45, 27, 0.3); }
+
+/* ---------- Mode sans animation ---------- */
+html[data-anim="off"] *,
+html[data-anim="off"] *::before,
+html[data-anim="off"] *::after {
+  animation: none !important;
+  transition: none !important;
+  scroll-behavior: auto !important;
+}
+html[data-anim="off"] .reveal { opacity: 1 !important; }
+html[data-anim="off"] .kid-bg,
+html[data-anim="off"] #scroll-progress { display: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .kid-bg { display: none; }
+}
+@media print {
+  .reveal { opacity: 1 !important; animation: none !important; }
+  .kid-bg, #scroll-progress, .anim-toggle { display: none !important; }
+}
