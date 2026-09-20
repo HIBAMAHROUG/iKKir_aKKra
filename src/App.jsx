@@ -49,6 +49,8 @@ const FrenchSixthAcceptanceQuiz = lazy(() => import('./pages/FrenchSixthAcceptan
 const FrenchSeventhControl = lazy(() => import('./pages/FrenchSeventhControl'))
 const FrenchSeventhControlQuiz = lazy(() => import('./pages/FrenchSeventhControlQuiz'))
 const Courses = lazy(() => import('./pages/Courses'))
+const About = lazy(() => import('./pages/About'))
+const Contact = lazy(() => import('./pages/Contact'))
 
 function App() {
   return (
@@ -103,8 +105,8 @@ function App() {
           <Route path="/courses" element={<Courses />} />
           <Route path="/courses/:level" element={<LevelCourses />} />
           <Route path="/levels" element={<SimplePage title="Niveaux" text="Choisissez votre niveau pour commencer vos révisions." />} />
-          <Route path="/contact" element={<SimplePage title="Contact" text="Une question ? La page de contact sera bientôt disponible." />} />
-          <Route path="/about" element={<SimplePage title="À propos" text="Ikkir Akkra accompagne les élèves dans leurs apprentissages." />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/about" element={<About />} />
           <Route path="*" element={<SimplePage title="Page introuvable" text="Cette adresse ne correspond à aucune page." />} />
         </Routes>
         </Suspense>
