@@ -1,0 +1,72 @@
+.auth-page {
+  max-width: 460px;
+  margin: 0 auto;
+  padding: 48px 20px 72px;
+  display: grid;
+  gap: 24px;
+  color: var(--ink, #163c2b);
+}
+.auth-page--wide { max-width: 760px; }
+
+.auth-card {
+  padding: 30px;
+  border-radius: 22px;
+  background: #ffffff;
+  border: 1px solid #dde7e0;
+  box-shadow: 0 8px 24px rgba(22, 60, 43, 0.08);
+}
+.auth-card h1,
+.auth-card h2 { margin: 0 0 8px; color: var(--ink, #163c2b); }
+.auth-lead { margin: 0 0 18px; line-height: 1.6; color: #3f5a4b; }
+
+.auth-form { display: grid; gap: 14px; }
+.auth-form label { display: grid; gap: 6px; font-weight: 600; color: var(--ink, #163c2b); }
+.auth-form input {
+  padding: 12px 14px;
+  border: 1px solid #9db8a8;
+  border-radius: 12px;
+  background: #ffffff;
+  color: var(--ink, #163c2b);
+  font: inherit;
+}
+.auth-form input:focus { outline: 3px solid #b9dcc8; border-color: #1f7a4d; }
+
+.auth-error {
+  margin: 0;
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: #fdecec;
+  border: 1px solid #f1b5b5;
+  color: #8a1c1c;
+  font-weight: 600;
+}
+
+.auth-button {
+  display: inline-block;
+  padding: 12px 22px;
+  border: 2px solid #1f7a4d;
+  border-radius: 999px;
+  background: #1f7a4d;
+  color: #ffffff;
+  font: inherit;
+  font-weight: 700;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+.auth-button:hover { background: #17603b; border-color: #17603b; }
+.auth-button:disabled { opacity: 0.6; cursor: wait; }
+.auth-button--alt { background: #ffffff; color: #1f7a4d; }
+.auth-button--alt:hover { background: #e3f1e8; color: #17603b; }
+.auth-button--danger { background: #ffffff; color: #a12626; border-color: #a12626; }
+.auth-button--danger:hover { background: #fdecec; border-color: #a12626; }
+
+.auth-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+.auth-switch { margin: 18px 0 0; text-align: center; color: var(--ink, #163c2b); }
+.auth-switch a { color: #0e6a8f; font-weight: 700; }
+
+.auth-table-wrap { overflow-x: auto; }
+.auth-table { width: 100%; border-collapse: collapse; }
+.auth-table th,
+.auth-table td { padding: 10px 12px; text-align: left; border-bottom: 1px solid #e5ece7; color: var(--ink, #163c2b); }
+.auth-table th { color: #8a4b08; font-size: 0.85rem; letter-spacing: 0.06em; text-transform: uppercase; }

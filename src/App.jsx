@@ -5,6 +5,7 @@ import Navbar from './components/Navbar'
 import Home from './pages/Home'
 import LevelCourses from './pages/LevelCourses'
 import SimplePage from './pages/SimplePage'
+import ProtectedRoute from './auth/ProtectedRoute'
 import './App.css'
 
 const EnglishUnitOne = lazy(() => import('./pages/EnglishUnitOne'))
@@ -49,6 +50,9 @@ const FrenchSixthAcceptanceQuiz = lazy(() => import('./pages/FrenchSixthAcceptan
 const FrenchSeventhControl = lazy(() => import('./pages/FrenchSeventhControl'))
 const FrenchSeventhControlQuiz = lazy(() => import('./pages/FrenchSeventhControlQuiz'))
 const Courses = lazy(() => import('./pages/Courses'))
+const Login = lazy(() => import('./pages/Login'))
+const Register = lazy(() => import('./pages/Register'))
+const Profile = lazy(() => import('./pages/Profile'))
 const About = lazy(() => import('./pages/About'))
 const Contact = lazy(() => import('./pages/Contact'))
 
@@ -107,6 +111,9 @@ function App() {
           <Route path="/levels" element={<SimplePage title="Niveaux" text="Choisissez votre niveau pour commencer vos révisions." />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/about" element={<About />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
           <Route path="*" element={<SimplePage title="Page introuvable" text="Cette adresse ne correspond à aucune page." />} />
         </Routes>
         </Suspense>

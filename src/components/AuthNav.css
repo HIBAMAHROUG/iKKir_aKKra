@@ -1,0 +1,16 @@
+.auth-nav { display: flex; align-items: center; gap: 10px; margin-left: 12px; }
+.auth-nav .auth-nav__link { color: var(--ink, #163c2b); font-weight: 600; text-decoration: none; white-space: nowrap; }
+.auth-nav .auth-nav__link:hover { text-decoration: underline; }
+.auth-nav .auth-nav__cta {
+  padding: 8px 16px;
+  border: 2px solid #1f7a4d;
+  border-radius: 999px;
+  background: #1f7a4d;
+  color: #ffffff;
+  font: inherit;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.auth-nav .auth-nav__cta:hover { background: #17603b; border-color: #17603b; }

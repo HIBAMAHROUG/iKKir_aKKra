@@ -1,3 +1,4 @@
+import AuthNav from './AuthNav';
 import { NavLink } from 'react-router-dom'
 import './Navbar.css'
 
@@ -28,6 +29,7 @@ function Navbar() {
             </NavLink>
           ))}
         </div>
+        <AuthNav />
       </nav>
     </header>
   )
