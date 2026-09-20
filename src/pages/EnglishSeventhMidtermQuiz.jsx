@@ -1,6 +1,4 @@
-import { useState } from 'react'
-import { Link } from 'react-router-dom'
-import './EnglishSeventh.css'
+import Quiz from '../components/Quiz'
 
 const questions = [
   ['Sam is thirteen years...', ['old', 'years', 'young'], 0],
@@ -25,6 +23,6 @@ const questions = [
   ['A hobby is...', ['an activity we enjoy', 'a family member', 'a school time'], 0],
 ]
 
-function EnglishSeventhMidtermQuiz() { const [selected, setSelected] = useState({}); const [submitted, setSubmitted] = useState(false); const score = questions.reduce((sum, item, index) => sum + (selected[index] === item[2] ? 1 : 0), 0); return <div className="seventh-page"><header className="seventh-heading"><p className="eyebrow">English · 7th form</p><h1>Mid-Term Test 1 · Revision Quiz</h1><p>20 questions · total /20.</p></header><section className="seventh-quiz-box">{questions.map((item, index) => <fieldset className="seventh-question" key={item[0]}><legend>{index + 1}. {item[0]}</legend>{item[1].map((option, optionIndex) => <label key={option}><input type="radio" name={`midterm-${index}`} checked={selected[index] === optionIndex} onChange={() => { setSelected((current) => ({ ...current, [index]: optionIndex })); setSubmitted(false) }} />{option}</label>)}</fieldset>)}<button className="seventh-button" type="button" onClick={() => setSubmitted(true)}>Correct my quiz</button>{submitted && <div className="seventh-score" role="status"><strong>Your mark: {score}/20</strong><span>{score >= 16 ? 'Excellent work!' : score >= 10 ? 'Good work, keep practising!' : 'Review the test versions and try again.'}</span></div>}</section><Link className="seventh-quiz-link" to="/courses/7eme">Back to 7th form →</Link></div> }
+function EnglishSeventhMidtermQuiz() { return <Quiz theme="seventh" lang="en" eyebrow="English · 7th form" title="Mid-Term Test 1 · Revision Quiz" subtitle="20 questions · total /20." questions={questions} backTo="/courses/7eme" backLabel="Back to 7th form →" highMessage="Excellent work!" lowMessage="Review the test versions and try again." /> }
 
 export default EnglishSeventhMidtermQuiz

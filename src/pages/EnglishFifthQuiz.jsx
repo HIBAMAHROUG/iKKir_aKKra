@@ -1,5 +1,4 @@
-import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import Quiz from '../components/Quiz'
 import './EnglishFifth.css'
 
 const questions = [
@@ -26,21 +25,7 @@ const questions = [
 ]
 
 function EnglishFifthQuiz() {
-  const [selected, setSelected] = useState({})
-  const [submitted, setSubmitted] = useState(false)
-  const score = questions.reduce((sum, item, index) => sum + (selected[index] === item[2] ? 1 : 0), 0)
-
-  return (
-    <div className="fifth-page fifth-quiz-page">
-      <header className="fifth-heading"><p className="eyebrow">English · 5th form · Level A1</p><h1>🎯 Greetings and Introductions Quiz</h1><p>20 questions · 1 point each · total /20.</p></header>
-      <section className="fifth-quiz-box">
-        {questions.map((item, index) => <fieldset className="fifth-question" key={item[0]}><legend>{index + 1}. {item[0]}</legend>{item[1].map((option, optionIndex) => <label key={option}><input type="radio" name={`fifth-${index}`} checked={selected[index] === optionIndex} onChange={() => { setSelected((current) => ({ ...current, [index]: optionIndex })); setSubmitted(false) }} />{option}</label>)}</fieldset>)}
-        <button className="fifth-button" type="button" onClick={() => setSubmitted(true)}>✅ Correct quiz</button>
-        {submitted && <div className="fifth-score"><strong>Your mark: {score}/20</strong><span>{score >= 16 ? 'Excellent!' : score >= 10 ? 'Good work, keep practising!' : 'Review the lesson and try again.'}</span></div>}
-      </section>
-      <Link className="fifth-quiz-link" to="/courses/5eme">Back to 5th form →</Link>
-    </div>
-  )
+  return <Quiz theme="fifth" lang="en" eyebrow="English · 5th form · Level A1" title="🎯 Greetings and Introductions Quiz" subtitle="20 questions · 1 point each · total /20." questions={questions} backTo="/courses/5eme" backLabel="Back to 5th form →" buttonLabel="✅ Correct quiz" />
 }
 
 export default EnglishFifthQuiz

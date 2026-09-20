@@ -1,7 +1,13 @@
 import { Link, useParams } from 'react-router-dom'
+import { getQuizResult } from '../utils/progress'
 import './Courses.css'
 
 const levelNames = { '5eme': '5th form', '6eme': '6th form', '7eme': '7th form' }
+
+function ModuleSide({ path }) {
+  const result = getQuizResult(`${path}/quiz`)
+  return <span className="module-side">{result && <span className="module-score" title={`Meilleur score : ${result.best}/${result.total} · ${result.attempts} essai(s)`}><span className="visually-hidden">Meilleur score : </span>{result.best}/{result.total}</span>}<span className="module-arrow" aria-hidden="true">→</span></span>
+}
 
 function LevelCourses() {
   const { level = '6eme' } = useParams()
@@ -80,7 +86,7 @@ function LevelCourses() {
             <div className="module-list">
               {subject.modules.map((module) => module.active ? (
                 <Link className="module-link" to={module.path} key={module.title}>
-                  <span><strong>{module.title}</strong><small>{module.detail}</small></span><span className="module-arrow">→</span>
+                  <span><strong>{module.title}</strong><small>{module.detail}</small></span><ModuleSide path={module.path} />
                 </Link>
               ) : (
                 <div className="module-link module-disabled" key={module.title}>

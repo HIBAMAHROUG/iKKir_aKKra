@@ -1,6 +1,4 @@
-import { useState } from 'react'
-import { Link } from 'react-router-dom'
-import './EnglishReading.css'
+import Quiz from '../components/Quiz'
 
 const questions = [
   ['Tom ___ eleven years old.', ['am', 'is', 'are'], 1],
@@ -25,11 +23,6 @@ const questions = [
   ['The bus is safer and...', ['more fun together', 'more expensive', 'very slow'], 0],
 ]
 
-function EnglishSixthReviewQuiz() {
-  const [selected, setSelected] = useState({})
-  const [submitted, setSubmitted] = useState(false)
-  const score = questions.reduce((sum, item, index) => sum + (selected[index] === item[2] ? 1 : 0), 0)
-  return <div className="reading-page reading-quiz-page"><header className="reading-heading"><p className="eyebrow">English · 6th form</p><h1>Revision Quiz</h1><p>20 questions · 1 point per correct answer · total /20.</p></header><section className="reading-quiz">{questions.map((item, index) => <fieldset className="reading-question" key={item[0]}><legend>{index + 1}. {item[0]}</legend>{item[1].map((option, optionIndex) => <label key={option}><input type="radio" name={`sixth-english-${index}`} checked={selected[index] === optionIndex} onChange={() => { setSelected((current) => ({ ...current, [index]: optionIndex })); setSubmitted(false) }} />{option}</label>)}</fieldset>)}<button className="reading-button" type="button" onClick={() => setSubmitted(true)}>Correct my quiz</button>{submitted && <div className="reading-score" role="status"><strong>Your mark: {score}/20</strong><span>{score >= 16 ? 'Excellent work!' : score >= 10 ? 'Good work, keep practising!' : 'Review the worksheet and try again.'}</span></div>}</section><Link className="button-link" to="/courses/6eme">Back to 6th form</Link></div>
-}
+function EnglishSixthReviewQuiz() { return <Quiz theme="reading" lang="en" eyebrow="English · 6th form" title="Revision Quiz" subtitle="20 questions · 1 point per correct answer · total /20." questions={questions} backTo="/courses/6eme" backLabel="Back to 6th form" highMessage="Excellent work!" lowMessage="Review the worksheet and try again." /> }
 
 export default EnglishSixthReviewQuiz

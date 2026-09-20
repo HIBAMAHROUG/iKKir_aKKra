@@ -1,58 +1,61 @@
+import { lazy, Suspense } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Footer from './components/Footer'
 import Navbar from './components/Navbar'
 import Home from './pages/Home'
-import EnglishUnitOne from './pages/EnglishUnitOne'
-import EnglishTenses from './pages/EnglishTenses'
-import EnglishReading from './pages/EnglishReading'
-import EnglishSixthReview from './pages/EnglishSixthReview'
-import EnglishSixthReviewQuiz from './pages/EnglishSixthReviewQuiz'
-import EnglishSeventh from './pages/EnglishSeventh'
-import EnglishSeventhQuiz from './pages/EnglishSeventhQuiz'
-import EnglishSeventhUnitTwo from './pages/EnglishSeventhUnitTwo'
-import EnglishSeventhUnitTwoQuiz from './pages/EnglishSeventhUnitTwoQuiz'
-import EnglishSeventhMidterm from './pages/EnglishSeventhMidterm'
-import EnglishSeventhMidtermQuiz from './pages/EnglishSeventhMidtermQuiz'
-import EnglishSeventhReview from './pages/EnglishSeventhReview'
-import EnglishSeventhReviewQuiz from './pages/EnglishSeventhReviewQuiz'
-import EnglishFifthGreetings from './pages/EnglishFifthGreetings'
-import EnglishFifthQuiz from './pages/EnglishFifthQuiz'
-import EnglishFifthUnits from './pages/EnglishFifthUnits'
-import EnglishFifthUnitsQuiz from './pages/EnglishFifthUnitsQuiz'
-import EnglishFifthReview from './pages/EnglishFifthReview'
-import EnglishFifthReviewQuiz from './pages/EnglishFifthReviewQuiz'
-import EnglishHobbies from './pages/EnglishHobbies'
-import EnglishHobbiesQuiz from './pages/EnglishHobbiesQuiz'
-import EnglishFreeTime from './pages/EnglishFreeTime'
-import EnglishFreeTimeQuiz from './pages/EnglishFreeTimeQuiz'
-import FrenchFourth from './pages/FrenchFourth'
-import FrenchFourthQuiz from './pages/FrenchFourthQuiz'
-import FrenchFifthEnvironment from './pages/FrenchFifthEnvironment'
-import FrenchFifthEnvironmentQuiz from './pages/FrenchFifthEnvironmentQuiz'
-import FrenchFifthModules from './pages/FrenchFifthModules'
-import FrenchFifthModulesQuiz from './pages/FrenchFifthModulesQuiz'
-import FrenchPresent from './pages/FrenchPresent'
-import FrenchPresentQuiz from './pages/FrenchPresentQuiz'
-import FrenchSeventhPast from './pages/FrenchSeventhPast'
-import FrenchSeventhPastQuiz from './pages/FrenchSeventhPastQuiz'
-import FrenchSeventhFamily from './pages/FrenchSeventhFamily'
 import LevelCourses from './pages/LevelCourses'
-import ModuleSix from './pages/ModuleSix'
-import FrenchSixthRevision from './pages/FrenchSixthRevision'
-import FrenchSixthRevisionQuiz from './pages/FrenchSixthRevisionQuiz'
-import FrenchSixthAcceptance from './pages/FrenchSixthAcceptance'
-import FrenchSixthAcceptanceQuiz from './pages/FrenchSixthAcceptanceQuiz'
-import FrenchSeventhControl from './pages/FrenchSeventhControl'
-import FrenchSeventhControlQuiz from './pages/FrenchSeventhControlQuiz'
-import Courses from './pages/Courses'
 import SimplePage from './pages/SimplePage'
 import './App.css'
+
+const EnglishUnitOne = lazy(() => import('./pages/EnglishUnitOne'))
+const EnglishTenses = lazy(() => import('./pages/EnglishTenses'))
+const EnglishReading = lazy(() => import('./pages/EnglishReading'))
+const EnglishSixthReview = lazy(() => import('./pages/EnglishSixthReview'))
+const EnglishSixthReviewQuiz = lazy(() => import('./pages/EnglishSixthReviewQuiz'))
+const EnglishSeventh = lazy(() => import('./pages/EnglishSeventh'))
+const EnglishSeventhQuiz = lazy(() => import('./pages/EnglishSeventhQuiz'))
+const EnglishSeventhUnitTwo = lazy(() => import('./pages/EnglishSeventhUnitTwo'))
+const EnglishSeventhUnitTwoQuiz = lazy(() => import('./pages/EnglishSeventhUnitTwoQuiz'))
+const EnglishSeventhMidterm = lazy(() => import('./pages/EnglishSeventhMidterm'))
+const EnglishSeventhMidtermQuiz = lazy(() => import('./pages/EnglishSeventhMidtermQuiz'))
+const EnglishSeventhReview = lazy(() => import('./pages/EnglishSeventhReview'))
+const EnglishSeventhReviewQuiz = lazy(() => import('./pages/EnglishSeventhReviewQuiz'))
+const EnglishFifthGreetings = lazy(() => import('./pages/EnglishFifthGreetings'))
+const EnglishFifthQuiz = lazy(() => import('./pages/EnglishFifthQuiz'))
+const EnglishFifthUnits = lazy(() => import('./pages/EnglishFifthUnits'))
+const EnglishFifthUnitsQuiz = lazy(() => import('./pages/EnglishFifthUnitsQuiz'))
+const EnglishFifthReview = lazy(() => import('./pages/EnglishFifthReview'))
+const EnglishFifthReviewQuiz = lazy(() => import('./pages/EnglishFifthReviewQuiz'))
+const EnglishHobbies = lazy(() => import('./pages/EnglishHobbies'))
+const EnglishHobbiesQuiz = lazy(() => import('./pages/EnglishHobbiesQuiz'))
+const EnglishFreeTime = lazy(() => import('./pages/EnglishFreeTime'))
+const EnglishFreeTimeQuiz = lazy(() => import('./pages/EnglishFreeTimeQuiz'))
+const FrenchFourth = lazy(() => import('./pages/FrenchFourth'))
+const FrenchFourthQuiz = lazy(() => import('./pages/FrenchFourthQuiz'))
+const FrenchFifthEnvironment = lazy(() => import('./pages/FrenchFifthEnvironment'))
+const FrenchFifthEnvironmentQuiz = lazy(() => import('./pages/FrenchFifthEnvironmentQuiz'))
+const FrenchFifthModules = lazy(() => import('./pages/FrenchFifthModules'))
+const FrenchFifthModulesQuiz = lazy(() => import('./pages/FrenchFifthModulesQuiz'))
+const FrenchPresent = lazy(() => import('./pages/FrenchPresent'))
+const FrenchPresentQuiz = lazy(() => import('./pages/FrenchPresentQuiz'))
+const FrenchSeventhPast = lazy(() => import('./pages/FrenchSeventhPast'))
+const FrenchSeventhPastQuiz = lazy(() => import('./pages/FrenchSeventhPastQuiz'))
+const FrenchSeventhFamily = lazy(() => import('./pages/FrenchSeventhFamily'))
+const ModuleSix = lazy(() => import('./pages/ModuleSix'))
+const FrenchSixthRevision = lazy(() => import('./pages/FrenchSixthRevision'))
+const FrenchSixthRevisionQuiz = lazy(() => import('./pages/FrenchSixthRevisionQuiz'))
+const FrenchSixthAcceptance = lazy(() => import('./pages/FrenchSixthAcceptance'))
+const FrenchSixthAcceptanceQuiz = lazy(() => import('./pages/FrenchSixthAcceptanceQuiz'))
+const FrenchSeventhControl = lazy(() => import('./pages/FrenchSeventhControl'))
+const FrenchSeventhControlQuiz = lazy(() => import('./pages/FrenchSeventhControlQuiz'))
+const Courses = lazy(() => import('./pages/Courses'))
 
 function App() {
   return (
     <BrowserRouter>
       <Navbar />
       <main>
+        <Suspense fallback={<p className="route-loading" role="status">Chargement...</p>}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/courses/6eme/module-1" element={<ModuleSix />} />
@@ -104,6 +107,7 @@ function App() {
           <Route path="/about" element={<SimplePage title="À propos" text="Ikkir Akkra accompagne les élèves dans leurs apprentissages." />} />
           <Route path="*" element={<SimplePage title="Page introuvable" text="Cette adresse ne correspond à aucune page." />} />
         </Routes>
+        </Suspense>
       </main>
       <Footer />
     </BrowserRouter>

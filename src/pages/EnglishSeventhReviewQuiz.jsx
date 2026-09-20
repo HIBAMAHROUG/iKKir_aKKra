@@ -1,6 +1,4 @@
-import { useState } from 'react'
-import { Link } from 'react-router-dom'
-import './EnglishSeventh.css'
+import Quiz from '../components/Quiz'
 
 const questions = [
   ['Meriam is ___ years old.', ['twelve', 'twenty', 'seven'], 0],
@@ -25,11 +23,6 @@ const questions = [
   ['The negative of “Maria likes grammar” is...', ['Maria don’t like grammar.', 'Maria doesn’t like grammar.', 'Maria isn’t like grammar.'], 1],
 ]
 
-function EnglishSeventhReviewQuiz() {
-  const [selected, setSelected] = useState({})
-  const [submitted, setSubmitted] = useState(false)
-  const score = questions.reduce((sum, item, index) => sum + (selected[index] === item[2] ? 1 : 0), 0)
-  return <div className="seventh-page"><header className="seventh-heading"><p className="eyebrow">English · 7th form</p><h1>Module 1 Review Quiz</h1><p>20 questions · 1 point each · total /20.</p></header><section className="seventh-quiz-box">{questions.map((item,index)=><fieldset className="seventh-question" key={item[0]}><legend>{index+1}. {item[0]}</legend>{item[1].map((option,optionIndex)=><label key={option}><input type="radio" name={`review-${index}`} checked={selected[index]===optionIndex} onChange={()=>{setSelected((current)=>({...current,[index]:optionIndex}));setSubmitted(false)}} />{option}</label>)}</fieldset>)}<button className="seventh-button" type="button" onClick={()=>setSubmitted(true)}>✅ Correct quiz</button>{submitted&&<div className="seventh-score"><strong>Your mark: {score}/20</strong><span>{score>=16?'Excellent!':score>=10?'Good work, keep practising!':'Review Module 1 and try again.'}</span></div>}</section><Link className="seventh-quiz-link" to="/courses/7eme">Back to 7th form →</Link></div>
-}
+function EnglishSeventhReviewQuiz() { return <Quiz theme="seventh" lang="en" eyebrow="English · 7th form" title="Module 1 Review Quiz" subtitle="20 questions · 1 point each · total /20." questions={questions} backTo="/courses/7eme" backLabel="Back to 7th form →" buttonLabel="✅ Correct quiz" lowMessage="Review Module 1 and try again." /> }
 
 export default EnglishSeventhReviewQuiz

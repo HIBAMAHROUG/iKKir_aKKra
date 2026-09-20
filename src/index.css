@@ -47,3 +47,257 @@ a:hover {
   display: flex;
   flex-direction: column;
 }
+
+/* Shared lesson surfaces keep every legacy worksheet in the storefront palette. */
+.fifth-heading,
+.fifth-section,
+.fifth-quiz-box,
+.reading-heading,
+.reading-section,
+.reading-quiz,
+.seventh-heading,
+.seventh-section,
+.seventh-quiz-box,
+.present-heading,
+.present-section,
+.present-quiz-box,
+.environment-heading,
+.environment-section,
+.environment-quiz-box,
+.fourth-heading,
+.fourth-section,
+.fourth-quiz-box,
+.module-heading,
+.lesson-section,
+.quiz-section,
+.tenses-heading,
+.tense-section,
+.tense-quiz,
+.english-heading,
+.english-section,
+.english-quiz {
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.86);
+  border-color: var(--line);
+  box-shadow: 0 14px 35px rgba(15, 79, 54, 0.1);
+}
+
+.fifth-heading h1,
+.fifth-section h2,
+.reading-heading h1,
+.reading-section h2,
+.reading-quiz h2,
+.seventh-heading h1,
+.seventh-section h2,
+.present-heading h1,
+.present-section h2,
+.environment-heading h1,
+.environment-section h2,
+.fourth-heading h1,
+.fourth-section h2,
+.module-heading h1,
+.lesson-section h2,
+.quiz-section h2,
+.tenses-heading h1,
+.tense-section h2,
+.tense-quiz h2,
+.english-heading h1,
+.english-section h2,
+.english-quiz h2 {
+  color: var(--ink);
+}
+
+.fifth-heading p,
+.fifth-section p,
+.fifth-section li,
+.reading-heading p,
+.reading-section p,
+.reading-section li,
+.seventh-heading p,
+.seventh-section p,
+.seventh-section li,
+.present-heading p,
+.present-section p,
+.present-section li,
+.environment-heading p,
+.environment-section p,
+.environment-section li,
+.fourth-heading p,
+.fourth-section p,
+.fourth-section li,
+.module-heading p,
+.lesson-section p,
+.lesson-section li,
+.quiz-section p,
+.tenses-heading p,
+.tense-section p,
+.tense-section li,
+.tense-quiz p,
+.english-heading p,
+.english-section p,
+.english-section li,
+.fifth-question,
+.reading-question,
+.seventh-question,
+.present-question,
+.environment-question,
+.fourth-question,
+.quiz-question,
+.tense-question,
+.english-question {
+  color: var(--ink);
+}
+
+.fifth-heading p:last-of-type,
+.reading-heading p:last-of-type,
+.seventh-heading p:last-of-type,
+.present-heading p:last-of-type,
+.environment-heading p:last-of-type,
+.fourth-heading p:last-of-type,
+.module-heading p:last-of-type,
+.tenses-heading p:last-of-type,
+.english-heading p:last-of-type,
+.quiz-section > p,
+.reading-quiz > p,
+.seventh-quiz-box > p,
+.present-quiz-box > p,
+.environment-quiz-box > p,
+.fourth-quiz-box > p,
+.english-quiz > p {
+  color: var(--muted);
+}
+
+.fifth-section strong,
+.reading-section strong,
+.seventh-section strong,
+.present-section strong,
+.environment-section strong,
+.fourth-section strong,
+.lesson-section strong,
+.tense-section strong,
+.english-section strong {
+  color: var(--green-900);
+}
+
+.fifth-question legend,
+.reading-question legend,
+.seventh-question legend,
+.present-question legend,
+.environment-question legend,
+.fourth-question legend,
+.quiz-question legend,
+.tense-question legend,
+.english-question legend {
+  color: var(--green-900);
+}
+
+.fifth-section h3,
+.reading-section h3,
+.seventh-section h3,
+.present-section h3,
+.environment-section h3,
+.fourth-section h3,
+.lesson-section h3,
+.tense-section h3,
+.english-section h3 {
+  color: var(--green-700);
+}
+
+.fifth-answer,
+.reading-answer,
+.seventh-answer,
+.present-answer,
+.environment-answer,
+.fourth-answer,
+.tense-answer,
+.answer-field,
+.lesson-section,
+.quiz-section,
+.fifth-section,
+.reading-section,
+.seventh-section,
+.present-section,
+.environment-section,
+.fourth-section,
+.english-section {
+  color: var(--ink);
+}
+
+.fifth-answer input,
+.fifth-answer textarea,
+.reading-answer input,
+.reading-answer textarea,
+.seventh-answer input,
+.seventh-answer textarea,
+.present-answer input,
+.present-answer textarea,
+.environment-answer input,
+.environment-answer textarea,
+.fourth-answer input,
+.fourth-answer textarea,
+.tense-answer input,
+.tense-answer textarea,
+.answer-field input,
+.answer-field textarea {
+  color: var(--ink);
+  border-color: var(--line);
+  background: #ffffff;
+}
+
+.reading-story,
+.seventh-reading,
+.environment-story,
+.reading-text,
+.dialogue,
+.reading-box {
+  color: var(--ink);
+  background: rgba(15, 107, 70, 0.07);
+}
+
+.fifth-correction summary,
+.reading-correction summary,
+.seventh-correction summary,
+.present-correction summary,
+.environment-correction summary,
+.fourth-correction summary,
+.correction summary,
+.english-correction summary {
+  color: var(--green-700);
+}
+
+.fifth-button,
+.fifth-quiz-link,
+.reading-button,
+.seventh-button,
+.seventh-quiz-link,
+.present-button,
+.present-quiz-link,
+.environment-button,
+.environment-quiz-link,
+.fourth-button,
+.quiz-link,
+.quiz-button,
+.english-button,
+.button-link {
+  color: #ffffff;
+  background: var(--green-700);
+  box-shadow: 0 8px 20px rgba(15, 107, 70, 0.2);
+}
+
+.fifth-button:hover,
+.fifth-quiz-link:hover,
+.reading-button:hover,
+.seventh-button:hover,
+.seventh-quiz-link:hover,
+.present-button:hover,
+.present-quiz-link:hover,
+.environment-button:hover,
+.environment-quiz-link:hover,
+.fourth-button:hover,
+.quiz-link:hover,
+.quiz-button:hover,
+.english-button:hover,
+.button-link:hover {
+  color: #ffffff;
+  background: var(--green-500);
+}

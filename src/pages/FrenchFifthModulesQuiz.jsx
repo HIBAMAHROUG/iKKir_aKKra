@@ -1,6 +1,4 @@
-import { useState } from 'react'
-import { Link } from 'react-router-dom'
-import './FrenchFifth.css'
+import Quiz from '../components/Quiz'
 
 const questions = [
   ['Que font les habitants du quartier ?', ['Ils organisent une journée de propreté', 'Ils organisent une fête', 'Ils quittent le quartier'], 0],
@@ -25,11 +23,6 @@ const questions = [
   ['« L’union fait la force » parle de...', ['la solidarité', 'la solitude', 'la colère'], 0],
 ]
 
-function FrenchFifthModulesQuiz() {
-  const [selected, setSelected] = useState({})
-  const [submitted, setSubmitted] = useState(false)
-  const score = questions.reduce((sum, item, index) => sum + (selected[index] === item[2] ? 1 : 0), 0)
-  return <div className="environment-page environment-quiz-page"><header className="environment-heading"><p className="eyebrow">Français · 5e année</p><h1>Quiz · Modules 1 &amp; 2</h1><p>20 questions · 1 point par bonne réponse · total /20.</p></header><section className="environment-quiz-box">{questions.map((item, index) => <fieldset className="environment-question" key={item[0]}><legend>{index + 1}. {item[0]}</legend>{item[1].map((option, optionIndex) => <label key={option}><input type="radio" name={`modules-${index}`} checked={selected[index] === optionIndex} onChange={() => { setSelected((current) => ({ ...current, [index]: optionIndex })); setSubmitted(false) }} />{option}</label>)}</fieldset>)}<button className="environment-button" type="button" onClick={() => setSubmitted(true)}>✅ Corriger le quiz</button>{submitted && <div className="environment-score" role="status"><strong>Ta note : {score}/20</strong><span>{score >= 16 ? 'Excellent travail !' : score >= 10 ? 'Bon travail, continue tes révisions.' : 'Relis les deux modules et réessaie.'}</span></div>}</section><Link className="environment-quiz-link" to="/courses/5eme">Retour au niveau 5e →</Link></div>
-}
+function FrenchFifthModulesQuiz() { return <Quiz theme="environment" lang="fr" eyebrow="Français · 5e année" title="Quiz · Modules 1 & 2" subtitle="20 questions · 1 point par bonne réponse · total /20." questions={questions} backTo="/courses/5eme" backLabel="Retour au niveau 5e →" buttonLabel="✅ Corriger le quiz" midMessage="Bon travail, continue tes révisions." lowMessage="Relis les deux modules et réessaie." /> }
 
 export default FrenchFifthModulesQuiz

@@ -1,0 +1,21 @@
+.qz-option {
+  padding: 4px 8px;
+  margin-left: -8px;
+  border-radius: 8px;
+}
+
+.qz-option:focus-within {
+  outline: 2px solid var(--green-700);
+  outline-offset: 1px;
+}
+
+.qz-locked label { cursor: default; }
+.qz-option--right { background: rgba(25, 169, 104, 0.16); box-shadow: inset 0 0 0 1px rgba(15, 107, 70, 0.5); }
+.qz-option--wrong { background: rgba(190, 45, 45, 0.1); box-shadow: inset 0 0 0 1px rgba(143, 29, 29, 0.5); }
+.qz-feedback { margin: 10px 0 0; font-size: 0.95rem; font-weight: 700; }
+.qz-feedback--ok { color: #0b5a3a; }
+.qz-feedback--ko { color: #8f1d1d; }
+.qz-warning { margin: 16px 0 0; padding: 11px 15px; border: 1px solid rgba(160, 100, 0, 0.55); border-radius: 10px; background: rgba(228, 167, 44, 0.2); color: var(--ink); font-weight: 600; }
+.qz-actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-top: 8px; }
+.qz-actions .qz-ghost { border: 2px solid var(--green-700); color: var(--green-700); background: transparent; }
+.qz-best { color: var(--muted); font-size: 0.95rem; }

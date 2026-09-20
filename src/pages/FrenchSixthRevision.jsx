@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import './ModuleSix.css'
+import './FrenchPresent.css'
 
 function Answer({ label, lines = 1 }) {
   return lines > 1 ? <label className="present-answer">{label}<textarea rows={lines} /></label> : <label className="present-answer">{label}<input type="text" /></label>
