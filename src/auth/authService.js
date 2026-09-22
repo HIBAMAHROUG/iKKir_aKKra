@@ -1,20 +1,18 @@
-import { db, session } from '../db/localDb';
-import { hashPassword, verifyPassword } from './password';
+import { api, clearToken, setToken } from '../api';
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const normalizeEmail = (email) => email.trim().toLowerCase();
 const toPublic = ({ id, name, email, createdAt }) => ({ id, name, email, createdAt });
 
 // Les erreurs sont des clés de traduction (voir src/i18n/*.js)
-export function getCurrentUser() {
-  const id = session.get();
-  if (!id) return null;
-  const user = db.find('users', (u) => u.id === id);
-  if (!user) {
-    session.clear();
+export async function getCurrentUser() {
+  try {
+    const { user } = await api('/auth/me');
+    return toPublic(user);
+  } catch {
+    clearToken();
     return null;
   }
-  return toPublic(user);
 }
 
 export async function registerUser({ name, email, password, confirm }) {
@@ -27,26 +25,31 @@ export async function registerUser({ name, email, password, confirm }) {
   if (confirm !== undefined && password !== confirm) throw new Error('err.confirm');
   if (db.find('users', (u) => u.email === cleanEmail)) throw new Error('err.exists');
 
-  const passwordHash = await hashPassword(password);
-  const user = db.insert('users', { name: cleanName, email: cleanEmail, passwordHash });
-  session.set(user.id);
+  const { user, token } = await api('/auth/register', {
+    method: 'POST',
+    body: JSON.stringify({ name: cleanName, email: cleanEmail, password }),
+  });
+  setToken(token);
   return toPublic(user);
 }
 
 export async function loginUser({ email, password }) {
-  const user = db.find('users', (u) => u.email === normalizeEmail(email));
-  const ok = user ? await verifyPassword(password, user.passwordHash) : false;
-  if (!ok) throw new Error('err.login');
-  session.set(user.id);
-  return toPublic(user);
+  try {
+    const { user, token } = await api('/auth/login', {
+      method: 'POST',
+      body: JSON.stringify({ email: normalizeEmail(email), password }),
+    });
+    setToken(token);
+    return toPublic(user);
+  } catch {
+    throw new Error('err.login');
+  }
 }
 
-export function logout() {
-  session.clear();
+export async function logout() {
+  try { await api('/auth/logout', { method: 'POST' }); } finally { clearToken(); }
 }
 
-export function deleteAccount(userId) {
-  db.removeWhere('results', (r) => r.userId === userId);
-  db.remove('users', userId);
-  session.clear();
+export async function deleteAccount() {
+  try { await api('/auth/account', { method: 'DELETE' }); } finally { clearToken(); }
 }

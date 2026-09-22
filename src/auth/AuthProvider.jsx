@@ -4,12 +4,16 @@ import { AuthContext } from './AuthContext';
 import * as auth from './authService';
 
 export default function AuthProvider({ children }) {
-  const [user, setUser] = useState(() => auth.getCurrentUser());
+  const [user, setUser] = useState(undefined);
+
+  useEffect(() => {
+    auth.getCurrentUser().then(setUser);
+  }, []);
 
   // Garde plusieurs onglets synchronisés (connexion / déconnexion)
   useEffect(() => {
     const onStorage = (e) => {
-      if (e.key === SESSION_KEY || e.key === null) setUser(auth.getCurrentUser());
+      if (e.key === SESSION_KEY || e.key === null) auth.getCurrentUser().then(setUser);
     };
     window.addEventListener('storage', onStorage);
     return () => window.removeEventListener('storage', onStorage);
@@ -28,14 +32,12 @@ export default function AuthProvider({ children }) {
   }, []);
 
   const logout = useCallback(() => {
-    auth.logout();
-    setUser(null);
+    auth.logout().then(() => setUser(null));
   }, []);
 
   const deleteAccount = useCallback(() => {
     if (!user) return;
-    auth.deleteAccount(user.id);
-    setUser(null);
+    auth.deleteAccount().then(() => setUser(null));
   }, [user]);
 
   const value = useMemo(

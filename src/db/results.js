@@ -1,11 +1,12 @@
-import { db } from './localDb';
+import { api } from '../api';
 
-export function saveResult({ userId, quiz, score, total }) {
-  return db.insert('results', { userId, quiz, score, total });
+export function saveResult({ quiz, score, total }) {
+  return api('/results', {
+    method: 'POST',
+    body: JSON.stringify({ quiz, score, total }),
+  });
 }
 
-export function getResults(userId) {
-  return db
-    .filter('results', (r) => r.userId === userId)
-    .sort((a, b) => b.createdAt.localeCompare(a.createdAt));
+export async function getResults() {
+  return api('/results');
 }

@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../auth/useAuth';
 import { getResults } from '../db/results';
@@ -9,17 +9,19 @@ export default function Profile() {
   const { user, logout, deleteAccount } = useAuth();
   const { t, locale } = useI18n();
   const navigate = useNavigate();
-  const results = useMemo(() => (user ? getResults(user.id) : []), [user]);
+  const [results, setResults] = useState([]);
+
+  useEffect(() => {
+    if (user) getResults().then(setResults).catch(() => setResults([]));
+  }, [user]);
 
   const handleLogout = () => {
-    logout();
-    navigate('/');
+    logout().then(() => navigate('/'));
   };
 
   const handleDelete = () => {
     if (window.confirm(t('profile.confirmDelete'))) {
-      deleteAccount();
-      navigate('/');
+      deleteAccount().then(() => navigate('/'));
     }
   };
 
