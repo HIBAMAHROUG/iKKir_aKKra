@@ -109,4 +109,10 @@ app.post('/api/results', authenticate, async (req, res) => {
   res.status(201).json(rows[0]);
 });
 
+
+app.use((err, req, res, next) => {
+  console.error(err);
+  res.status(500).json({ error: 'Erreur serveur.' });
+});
+
 app.listen(port, () => console.log(`API PostgreSQL disponible sur http://localhost:${port}`));
