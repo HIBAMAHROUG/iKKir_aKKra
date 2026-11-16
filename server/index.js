@@ -171,7 +171,7 @@ app.post('/api/results', authenticate, writeRateLimit, async (req, res) => {
 });
 
 
-app.use((err, req, res, next) => {
+app.use((err, _req, res, _next) => {
   console.error(err);
   res.status(500).json({ error: 'Erreur serveur.' });
 });

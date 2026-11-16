@@ -859,6 +859,53 @@ compilation.
 Le frontend et l'API peuvent être déployés sur des domaines différents, mais
 la configuration CORS et l'URL d'API doivent alors être cohérentes.
 
+### Configuration Vercel + Render
+
+Le dépôt contient les manifests suivants :
+
+- [vercel.json](./vercel.json) : build du frontend Vite, publication de
+  `dist/` et fallback SPA vers `index.html` ;
+- [render.yaml](./render.yaml) : service web Render pour l'API Express,
+  contrôle de santé `/api/health` et variables sensibles à saisir dans le
+  tableau de bord.
+
+Procédure :
+
+1. Importer le dépôt dans Vercel et conserver la commande `npm run build`.
+2. Définir `VITE_API_URL` avec l'URL HTTPS publique du service Render suivie
+   de `/api`.
+3. Créer le service Render à partir de `render.yaml`.
+4. Dans Render, saisir `DATABASE_URL` avec l'URL Supabase PostgreSQL et
+   `CLIENT_URL` avec l'URL Vercel HTTPS.
+5. Appliquer [server/schema.sql](./server/schema.sql) une fois sur la base
+   Supabase avant de démarrer l'API.
+6. Vérifier `https://<api>/api/health` puis le parcours frontend.
+
+Les valeurs `DATABASE_URL` et `CLIENT_URL` sont volontairement déclarées
+`sync: false` afin qu'aucun secret ou domaine ne soit commité.
+
+### Sauvegardes Supabase
+
+Les sauvegardes ne peuvent pas être configurées depuis ce dépôt sans accès au
+projet Supabase. Dans Supabase, activer les sauvegardes et la rétention
+adaptées au plan choisi, puis tester une restauration sur un projet séparé.
+Pour une sauvegarde indépendante, utiliser `pg_dump` depuis un environnement
+sécurisé :
+
+```bash
+mkdir -p backups
+pg_dump "$DATABASE_URL" --format=custom --file "backups/ikkir-akkra-$(date -u +%Y%m%dT%H%M%SZ).dump"
+```
+
+Ne pas commiter le répertoire `backups/`. Stocker les dumps chiffrés dans un
+coffre ou un stockage privé avec une politique de rétention, et vérifier
+régulièrement une restauration :
+
+```bash
+createdb ikkir_akkra_restore
+pg_restore --clean --if-exists --dbname "$RESTORE_DATABASE_URL" backup.dump
+```
+
 ## Dépannage
 
 ### `ECONNREFUSED` ou échec de `/api/health`

@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: ikkir-akkra-api
+    runtime: node
+    buildCommand: npm ci --omit=dev
+    startCommand: npm run server
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: TRUST_PROXY
+        value: "true"
+      - key: DATABASE_URL
+        sync: false
+      - key: CLIENT_URL
+        sync: false
