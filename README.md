@@ -5,9 +5,6 @@ l'apprentissage du français et de l'anglais. L'application propose des
 parcours par niveau scolaire, des leçons, des exercices corrigés, des quiz
 interactifs et un espace personnel permettant de consulter les résultats.
 
-> **État du projet** : application en développement. Les niveaux 5e, 6e et 7e
-> sont présents dans l'interface, mais le catalogue de contenus n'est pas
-> encore identique pour tous les niveaux.
 
 ## Sommaire
 
@@ -172,6 +169,8 @@ CLIENT_URL=http://localhost:5173
 | `DATABASE_URL` | Oui | aucune | URL de connexion PostgreSQL utilisée par `server/db.js` |
 | `PORT` | Non | `3001` | Port HTTP de l'API Express |
 | `CLIENT_URL` | Non | `http://localhost:5173` | Origine autorisée par CORS |
+| `TRUST_PROXY` | Non | `false` | Doit être `true` uniquement derrière un reverse proxy de confiance |
+| `NODE_ENV` | Non | aucune | En `production`, impose HTTPS pour `CLIENT_URL` et `TRUST_PROXY=true` |
 
 Format recommandé de `DATABASE_URL` :
 
@@ -913,19 +912,39 @@ Le projet applique déjà plusieurs mesures utiles :
 - sessions aléatoires stockées côté serveur ;
 - suppression en cascade des données associées.
 
-Avant une mise en production, prévoir également :
+Les protections déjà intégrées dans cette version sont :
 
-- HTTPS obligatoire ;
-- rotation, expiration et révocation planifiée des sessions ;
-- limitation du nombre de tentatives de connexion ;
-- validation stricte de `quiz`, `score` et `total` côté serveur ;
-- limites de taille des requêtes JSON ;
-- journalisation sans mots de passe ni jetons ;
-- politique CORS restrictive ;
-- sauvegardes et migrations PostgreSQL ;
-- gestion d'un fichier `.gitignore` excluant `.env` et les artefacts locaux ;
-- tests d'intégration pour l'authentification et les résultats ;
-- politique de confidentialité adaptée aux données d'élèves.
+- en-têtes HTTP `X-Content-Type-Options`, `X-Frame-Options`,
+  `Referrer-Policy` et `Permissions-Policy` ;
+- désactivation de l'en-tête Express `X-Powered-By` ;
+- limitation des requêtes JSON à 100 ko ;
+- limitation en mémoire des tentatives d'inscription et de connexion ;
+- limitation des écritures de session et de résultats ;
+- validation de la taille et du type des résultats ;
+- sessions expirant après 30 jours ;
+- validation stricte du format Bearer et des hashes de mots de passe ;
+- arrêt propre du serveur sur `SIGTERM` et `SIGINT` ;
+- exclusion de `.env`, `node_modules`, `dist` et des rapports de couverture
+  dans `.gitignore` ;
+- workflow GitHub Actions dans `.github/workflows/ci.yml` avec installation
+  reproductible, audit, lint, tests et build.
+- tests unitaires ciblés du rate limiting dans
+  `server/rateLimit.test.js` ;
+- garde-fous de démarrage en production : `CLIENT_URL` HTTPS et proxy de
+  confiance explicitement activé ;
+- réponses API marquées `Cache-Control: no-store` et HSTS activé en production.
+
+Les éléments qui restent dépendants de l'hébergeur sont :
+
+- terminaison TLS/HTTPS et redirection HTTP vers HTTPS ;
+- sauvegardes et restauration PostgreSQL ;
+- journalisation et surveillance centralisées ;
+- limitation distribuée si plusieurs instances API sont déployées.
+
+Le rate limiting actuel est volontairement sans dépendance et en mémoire.
+Il protège une instance unique, mais doit être remplacé par un mécanisme
+partagé (par exemple celui du reverse proxy ou Redis) en cas de déploiement
+horizontal.
 
 ## Arborescence
 
