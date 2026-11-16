@@ -60,10 +60,10 @@ export function burst(x, y, count = 14, emoji = false) {
 }
 
 function celebrate(el) {
-  const r = el.getBoundingClientRect();
-  burst(r.left + r.width / 2, r.top + Math.min(r.height / 2, 120), 26, true);
-  [250, 500].forEach((delay) =>
-    setTimeout(() => burst(rand(0.2, 0.8) * window.innerWidth, window.innerHeight * 0.35, 18, true), delay),
+  if (!el.animate) return;
+  el.animate(
+    [{ transform: 'scale(1)' }, { transform: 'scale(1.015)' }, { transform: 'scale(1)' }],
+    { duration: 420, easing: 'ease-out' },
   );
 }
 
@@ -103,8 +103,10 @@ function onMutations(records) {
       const before = (r.oldValue || '').split(/\s+/);
       const gained = Array.from(el.classList).filter((c) => !before.includes(c));
       if (gained.some((c) => RIGHT.has(c))) {
-        const b = el.getBoundingClientRect();
-        burst(b.left + b.width / 2, b.top + b.height / 2, 16, true);
+        el.animate?.(
+          [{ transform: 'scale(1)' }, { transform: 'scale(1.015)' }, { transform: 'scale(1)' }],
+          { duration: 420, easing: 'ease-out' },
+        );
       }
     }
   });
@@ -209,10 +211,8 @@ export function initAnimations() {
   });
   prepare(document.body);
 
-  document.addEventListener('pointerdown', (e) => {
+  document.addEventListener('pointerdown', () => {
     lastInput = performance.now();
-    const t = e.target instanceof Element ? e.target.closest('button, summary, [role="button"], a[class*="button"], label') : null;
-    if (t && !t.classList.contains('anim-toggle')) burst(e.clientX, e.clientY, 7);
   });
   document.addEventListener('keydown', () => {
     lastInput = performance.now();

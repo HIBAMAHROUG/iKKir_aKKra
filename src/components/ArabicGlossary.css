@@ -1,46 +1,75 @@
 .arabic-glossary {
-  width: min(100% - 32px, 1120px);
-  margin: 24px auto 40px;
-  padding: 20px;
-  border: 1px solid var(--line);
-  border-radius: 18px;
-  background: rgba(255, 255, 255, 0.9);
-  box-shadow: 0 10px 24px rgba(15, 79, 54, 0.08);
+  width: min(100% - 48px, 1040px);
+  margin: 8px auto 48px;
+  padding: 22px 24px 24px;
+  border: 1px solid #d5e5dc;
+  border-top: 3px solid var(--green-500);
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 8px 24px rgba(22, 60, 43, 0.06);
 }
 
 .arabic-glossary h2 {
-  margin: 0 0 14px;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  margin: 0 0 16px;
   color: var(--ink);
-  font-size: 1.15rem;
+  font-size: 1rem;
+  letter-spacing: 0.01em;
 }
 
 .arabic-glossary h2 span {
   color: var(--muted);
-  font-size: 0.9rem;
+  font-size: 0.82rem;
   font-weight: 500;
 }
 
 .arabic-glossary__grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 10px;
+  gap: 8px;
 }
 
 .arabic-glossary__grid span {
   display: grid;
   gap: 2px;
-  padding: 9px 11px;
-  border-radius: 10px;
-  background: var(--green-100);
+  padding: 10px 12px;
+  border: 1px solid #e1eee7;
+  border-radius: 8px;
+  background: #f7fbf8;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.arabic-glossary__grid span:hover {
+  border-color: #9dcdb1;
+  transform: translateY(-2px);
 }
 
 .arabic-glossary__grid strong {
   color: var(--green-900);
-  font-size: 0.95rem;
+  font-size: 0.9rem;
 }
 
 .arabic-glossary__grid small {
   color: var(--muted);
-  font-size: 0.82rem;
+  font-size: 0.78rem;
   line-height: 1.35;
+}
+
+@media (max-width: 600px) {
+  .arabic-glossary {
+    width: min(100% - 32px, 1040px);
+    padding: 18px;
+  }
+
+  .arabic-glossary h2 {
+    display: block;
+  }
+
+  .arabic-glossary h2 span {
+    display: block;
+    margin-top: 3px;
+  }
 }
