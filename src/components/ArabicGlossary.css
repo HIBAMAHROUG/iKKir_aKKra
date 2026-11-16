@@ -1,0 +1,46 @@
+.arabic-glossary {
+  width: min(100% - 32px, 1120px);
+  margin: 24px auto 40px;
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 10px 24px rgba(15, 79, 54, 0.08);
+}
+
+.arabic-glossary h2 {
+  margin: 0 0 14px;
+  color: var(--ink);
+  font-size: 1.15rem;
+}
+
+.arabic-glossary h2 span {
+  color: var(--muted);
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.arabic-glossary__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 10px;
+}
+
+.arabic-glossary__grid span {
+  display: grid;
+  gap: 2px;
+  padding: 9px 11px;
+  border-radius: 10px;
+  background: var(--green-100);
+}
+
+.arabic-glossary__grid strong {
+  color: var(--green-900);
+  font-size: 0.95rem;
+}
+
+.arabic-glossary__grid small {
+  color: var(--muted);
+  font-size: 0.82rem;
+  line-height: 1.35;
+}

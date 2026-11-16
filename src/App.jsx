@@ -2,6 +2,7 @@ import { lazy, Suspense } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Footer from './components/Footer'
 import Navbar from './components/Navbar'
+import ArabicGlossary from './components/ArabicGlossary'
 import Home from './pages/Home'
 import LevelCourses from './pages/LevelCourses'
 import { LevelsPage, NotFound, Loading } from './pages/TranslatedPages'
@@ -116,6 +117,7 @@ function App() {
           <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
           <Route path="*" element={<NotFound />} />
         </Routes>
+        <ArabicGlossary />
         </Suspense>
       </main>
       <Footer />
