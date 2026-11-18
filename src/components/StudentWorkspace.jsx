@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import { useLocation } from 'react-router-dom'
+import { api } from '../api'
+import { useAuth } from '../auth/useAuth'
 import './StudentWorkspace.css'
 
 const missions = [
@@ -23,6 +25,7 @@ function readStored(key, fallback) {
 
 function StudentWorkspace() {
   const { pathname } = useLocation()
+  const { user } = useAuth()
   const [answers, setAnswers] = useState(() => readStored(`student:${pathname}:game`, [null, null, null, null, null, null]))
   const [builtParts, setBuiltParts] = useState(() => readStored(`student:${pathname}:parts`, []))
   const [saved, setSaved] = useState(false)
@@ -38,6 +41,13 @@ function StudentWorkspace() {
   function saveNow() {
     localStorage.setItem(`student:${pathname}:game`, JSON.stringify(answers))
     localStorage.setItem(`student:${pathname}:parts`, JSON.stringify(builtParts))
+    const stars = answers.filter(Boolean).length
+    if (user && stars > 0) {
+      api('/progress/workspace', {
+        method: 'POST',
+        body: JSON.stringify({ quiz: pathname, score: stars, total: 6 }),
+      }).catch(() => {})
+    }
     setSaved(true)
   }
 

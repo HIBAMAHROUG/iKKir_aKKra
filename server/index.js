@@ -41,7 +41,15 @@ const writeRateLimit = rateLimit({
 });
 
 function publicUser(user) {
-  return { id: user.id, name: user.name, email: user.email, createdAt: user.created_at };
+  return {
+    id: user.id,
+    name: user.name,
+    email: user.email,
+    role: user.role || 'student',
+    level: user.level || '5eme',
+    points: Number(user.points || 0),
+    createdAt: user.created_at,
+  };
 }
 
 function hashPassword(password, salt = crypto.randomBytes(16).toString('hex')) {
@@ -73,7 +81,7 @@ async function authenticate(req, res, next) {
   if (!token) return res.status(401).json({ error: 'Non authentifie.' });
 
   const { rows } = await query(
-    `SELECT u.id, u.name, u.email, u.created_at
+    `SELECT u.id, u.name, u.email, u.role, u.level, u.points, u.created_at
      FROM sessions s JOIN users u ON u.id = s.user_id
      WHERE s.token = $1 AND s.expires_at > NOW()`,
     [token],
@@ -90,7 +98,7 @@ app.get('/api/health', async (_req, res) => {
 });
 
 app.post('/api/auth/register', authRateLimit, async (req, res) => {
-  const { name, email, password } = req.body;
+  const { name, email, password, level = '5eme' } = req.body;
   if (
     typeof name !== 'string' ||
     typeof email !== 'string' ||
@@ -99,14 +107,15 @@ app.post('/api/auth/register', authRateLimit, async (req, res) => {
     name.trim().length > 100 ||
     email.trim().length > 254 ||
     password.length < 6 ||
-    password.length > 200
+    password.length > 200 ||
+    !['5eme', '6eme', '7eme'].includes(level)
   ) {
     return res.status(400).json({ error: 'Donnees d’inscription invalides.' });
   }
   try {
     const { rows } = await query(
-      'INSERT INTO users (name, email, password_hash) VALUES ($1, $2, $3) RETURNING id, name, email, created_at',
-      [name.trim(), email.trim().toLowerCase(), hashPassword(password)],
+      'INSERT INTO users (name, email, password_hash, level) VALUES ($1, $2, $3, $4) RETURNING id, name, email, role, level, points, created_at',
+      [name.trim(), email.trim().toLowerCase(), hashPassword(password), level],
     );
     const token = await createSession(rows[0].id);
     res.status(201).json({ user: publicUser(rows[0]), token });
@@ -167,7 +176,86 @@ app.post('/api/results', authenticate, writeRateLimit, async (req, res) => {
     'INSERT INTO results (user_id, quiz, score, total) VALUES ($1, $2, $3, $4) RETURNING id, quiz, score, total, created_at AS "createdAt"',
     [req.user.id, quiz, score, total],
   );
+  await query('UPDATE users SET points = points + $1 WHERE id = $2', [score, req.user.id]);
   res.status(201).json(rows[0]);
+});
+
+app.post('/api/progress/workspace', authenticate, writeRateLimit, async (req, res) => {
+  const { quiz, score, total } = req.body;
+  if (
+    typeof quiz !== 'string' || quiz.length < 1 || quiz.length > 200 ||
+    !Number.isInteger(score) || !Number.isInteger(total) ||
+    score < 0 || total < 1 || score > total
+  ) {
+    return res.status(400).json({ error: 'Progression invalide.' });
+  }
+  await query(
+    'INSERT INTO results (user_id, quiz, score, total) VALUES ($1, $2, $3, $4)',
+    [req.user.id, quiz, score, total],
+  );
+  await query('UPDATE users SET points = points + $1 WHERE id = $2', [score, req.user.id]);
+  res.status(201).json({ ok: true });
+});
+
+app.get('/api/profile', authenticate, async (req, res) => {
+  const { rows } = await query(
+    'SELECT id, name, email, role, level, points, created_at FROM users WHERE id = $1',
+    [req.user.id],
+  );
+  res.json({ user: publicUser(rows[0]) });
+});
+
+app.put('/api/profile/level', authenticate, async (req, res) => {
+  const { level } = req.body;
+  if (!['5eme', '6eme', '7eme'].includes(level)) {
+    return res.status(400).json({ error: 'Le niveau est invalide.' });
+  }
+  const { rows } = await query(
+    'UPDATE users SET level = $1 WHERE id = $2 RETURNING id, name, email, role, level, points, created_at',
+    [level, req.user.id],
+  );
+  res.json({ user: publicUser(rows[0]) });
+});
+
+app.post('/api/messages', authenticate, writeRateLimit, async (req, res) => {
+  const { subject, body, recipientEmail } = req.body;
+  const teacherEmail = (process.env.TEACHER_EMAIL || 'zarouihiba@gmail.com').trim().toLowerCase();
+  if (
+    typeof subject !== 'string' || subject.trim().length < 2 || subject.length > 120 ||
+    typeof body !== 'string' || body.trim().length < 2 || body.length > 3000 ||
+    typeof recipientEmail !== 'string'
+  ) {
+    return res.status(400).json({ error: 'Message invalide.' });
+  }
+  if (teacherEmail && recipientEmail.trim().toLowerCase() !== teacherEmail) {
+    return res.status(400).json({ error: 'Tu ne peux écrire qu’à ton enseignant.' });
+  }
+  const recipient = recipientEmail.trim().toLowerCase();
+  const { rows } = await query(
+    'INSERT INTO messages (sender_id, recipient_email, subject, body) VALUES ($1, $2, $3, $4) RETURNING id, recipient_email AS "recipientEmail", subject, body, created_at AS "createdAt"',
+    [req.user.id, recipient, subject.trim(), body.trim()],
+  );
+  res.status(201).json(rows[0]);
+});
+
+app.get('/api/messages/inbox', authenticate, async (req, res) => {
+  const teacherEmail = (process.env.TEACHER_EMAIL || 'zarouihiba@gmail.com').trim().toLowerCase();
+  if (req.user.email.trim().toLowerCase() !== teacherEmail) {
+    return res.status(403).json({ error: 'Accès réservé à l’enseignant.' });
+  }
+  const { rows } = await query(
+    'SELECT m.id, m.subject, m.body, m.created_at AS "createdAt", u.name AS "senderName", u.email AS "senderEmail", u.level AS "senderLevel" FROM messages m JOIN users u ON u.id = m.sender_id WHERE m.recipient_email = $1 ORDER BY m.created_at DESC',
+    [teacherEmail],
+  );
+  res.json(rows);
+});
+
+app.get('/api/messages', authenticate, async (req, res) => {
+  const { rows } = await query(
+    'SELECT m.id, m.recipient_email AS "recipientEmail", m.subject, m.body, m.created_at AS "createdAt", u.name AS "senderName", u.email AS "senderEmail" FROM messages m JOIN users u ON u.id = m.sender_id WHERE m.sender_id = $1 ORDER BY m.created_at DESC',
+    [req.user.id],
+  );
+  res.json(rows);
 });
 
 

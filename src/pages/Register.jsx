@@ -9,7 +9,7 @@ export default function Register() {
   const { t } = useI18n();
   const navigate = useNavigate();
 
-  const [form, setForm] = useState({ name: '', email: '', password: '', confirm: '' });
+  const [form, setForm] = useState({ name: '', email: '', password: '', confirm: '', level: '5eme' });
   const [error, setError] = useState('');
   const [busy, setBusy] = useState(false);
 
@@ -44,6 +44,14 @@ export default function Register() {
           <label>
             {t('login.email')}
             <input type="email" name="email" value={form.email} onChange={update} required autoComplete="email" />
+          </label>
+          <label>
+            Mon niveau
+            <select name="level" value={form.level} onChange={update} required>
+              <option value="5eme">5e année</option>
+              <option value="6eme">6e année</option>
+              <option value="7eme">7e année</option>
+            </select>
           </label>
           <label>
             {t('register.password')}

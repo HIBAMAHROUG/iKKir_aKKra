@@ -2,7 +2,7 @@ import { api, clearToken, setToken } from '../api';
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const normalizeEmail = (email) => email.trim().toLowerCase();
-const toPublic = ({ id, name, email, createdAt }) => ({ id, name, email, createdAt });
+const toPublic = ({ id, name, email, level, role, points, createdAt }) => ({ id, name, email, level, role, points, createdAt });
 
 // Les erreurs sont des clés de traduction (voir src/i18n/*.js)
 export async function getCurrentUser() {
@@ -15,7 +15,7 @@ export async function getCurrentUser() {
   }
 }
 
-export async function registerUser({ name, email, password, confirm }) {
+export async function registerUser({ name, email, password, confirm, level = '5eme' }) {
   const cleanName = name.trim();
   const cleanEmail = normalizeEmail(email);
 
@@ -23,11 +23,11 @@ export async function registerUser({ name, email, password, confirm }) {
   if (!EMAIL_RE.test(cleanEmail)) throw new Error('err.email');
   if (password.length < 6) throw new Error('err.password');
   if (confirm !== undefined && password !== confirm) throw new Error('err.confirm');
-  if (db.find('users', (u) => u.email === cleanEmail)) throw new Error('err.exists');
+  if (!['5eme', '6eme', '7eme'].includes(level)) throw new Error('Le niveau est invalide.');
 
   const { user, token } = await api('/auth/register', {
     method: 'POST',
-    body: JSON.stringify({ name: cleanName, email: cleanEmail, password }),
+    body: JSON.stringify({ name: cleanName, email: cleanEmail, password, level }),
   });
   setToken(token);
   return toPublic(user);

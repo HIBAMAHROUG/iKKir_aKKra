@@ -22,7 +22,9 @@
 .auth-lead { margin: 0 0 18px; line-height: 1.6; color: #3f5a4b; }
 .auth-form { display: grid; gap: 14px; }
 .auth-form label { display: grid; gap: 6px; font-weight: 600; }
-.auth-form input {
+.auth-form input,
+.auth-form select,
+.auth-form textarea {
   padding: 12px 14px;
   border: 1px solid #9db8a8;
   border-radius: 12px;
@@ -30,7 +32,9 @@
   color: var(--ink, #163c2b);
   font: inherit;
 }
-.auth-form input:focus { outline: 3px solid #b9dcc8; border-color: #1f7a4d; }
+.auth-form input:focus,
+.auth-form select:focus,
+.auth-form textarea:focus { outline: 3px solid #b9dcc8; border-color: #1f7a4d; }
 .auth-error {
   margin: 0;
   padding: 10px 14px;
@@ -72,3 +76,8 @@
 }
 .auth-table th { color: #8a4b08; font-size: 0.85rem; letter-spacing: 0.06em; text-transform: uppercase; }
 .auth-danger { border-color: #f1b5b5; }
+.profile-score { display: flex; align-items: baseline; gap: 8px; color: #5a7467; }
+.profile-score strong { color: #0f6b46; font-size: 3rem; line-height: 1; }
+.profile-message { margin-top: 12px; padding: 14px; border: 1px solid #dde7e0; border-radius: 12px; background: #f7fbf8; }
+.profile-message p { margin: 6px 0; }
+.profile-message small { color: #5a7467; }

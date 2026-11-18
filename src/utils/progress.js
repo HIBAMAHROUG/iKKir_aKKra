@@ -1,3 +1,5 @@
+import { api } from '../api'
+
 // Save quiz results locally in the learner's browser.
 const PREFIX = 'ikkir:quiz:'
 
@@ -30,5 +32,9 @@ export function saveQuizResult(path, score, total) {
   } catch {
     // Keep the visible result even when browser storage is unavailable.
   }
+  api('/progress/workspace', {
+    method: 'POST',
+    body: JSON.stringify({ quiz: path, score, total }),
+  }).catch(() => {})
   return result
 }

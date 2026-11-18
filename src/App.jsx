@@ -1,5 +1,5 @@
 import { lazy, Suspense } from 'react'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Route, Routes, useLocation, Navigate } from 'react-router-dom'
 import Footer from './components/Footer'
 import Navbar from './components/Navbar'
 import ArabicGlossary from './components/ArabicGlossary'
@@ -8,6 +8,7 @@ import Home from './pages/Home'
 import LevelCourses from './pages/LevelCourses'
 import { LevelsPage, NotFound, Loading } from './pages/TranslatedPages'
 import ProtectedRoute from './auth/ProtectedRoute'
+import { useAuth } from './auth/useAuth'
 import './App.css'
 
 const EnglishUnitOne = lazy(() => import('./pages/EnglishUnitOne'))
@@ -61,12 +62,29 @@ const Profile = lazy(() => import('./pages/Profile'))
 const About = lazy(() => import('./pages/About'))
 const Contact = lazy(() => import('./pages/Contact'))
 
+function StudentLevelGuard({ children }) {
+  const { user } = useAuth()
+  const { pathname } = useLocation()
+  if (user && /^\/courses\/[^/]+/.test(pathname)) {
+    const match = pathname.match(/^\/courses\/([^/]+)/)
+    const level = match?.[1]
+    if (['5eme', '6eme', '7eme'].includes(level) && level !== user.level) {
+      return <Navigate to={`/courses/${user.level}`} replace />
+    }
+  }
+  if (user && pathname === '/courses') {
+    return <Navigate to={`/courses/${user.level || '5eme'}`} replace />
+  }
+  return children
+}
+
 function App() {
   return (
     <BrowserRouter>
       <Navbar />
       <main>
         <Suspense fallback={<Loading />}>
+        <StudentLevelGuard>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/courses/6eme/module-1" element={<ModuleSix />} />
@@ -127,6 +145,7 @@ function App() {
           <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
           <Route path="*" element={<NotFound />} />
         </Routes>
+        </StudentLevelGuard>
         <StudentWorkspace key={window.location.pathname} />
         <ArabicGlossary />
         </Suspense>
