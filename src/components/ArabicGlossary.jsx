@@ -3,6 +3,30 @@ import './ArabicGlossary.css'
 
 const glossaries = [
   {
+    match: '6eme/francais/module-1-production',
+    title: 'Mots intéressants',
+    words: [
+      ['La responsabilité', 'المسؤولية'],
+      ['Diriger', 'يدير'],
+      ['Le leadership', 'القيادة'],
+      ['La prévention', 'الوقاية'],
+      ['La sécurité', 'السلامة / الأمان'],
+      ['Le sang-froid', 'رباطة الجأش'],
+      ['La créativité', 'الإبداع'],
+      ['La confiance en soi', 'الثقة بالنفس'],
+      ['La concentration', 'التركيز'],
+      ['Un patient', 'مريض'],
+      ['Rassurer', 'يطمئن'],
+      ['La croissance', 'النموّ'],
+      ['L’esthétique', 'الذوق الجمالي'],
+      ['Une douceur', 'حلوى'],
+      ['Transmettre', 'ينقل / يعلّم'],
+      ['La réussite', 'النجاح'],
+      ['Soulager', 'يخفّف الألم'],
+      ['Une profession', 'مهنة'],
+    ],
+  },
+  {
     match: 'english/greetings',
     title: 'Essential words',
     words: [

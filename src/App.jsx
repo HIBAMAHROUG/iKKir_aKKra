@@ -48,6 +48,7 @@ const FrenchSixthRevision = lazy(() => import('./pages/FrenchSixthRevision'))
 const FrenchSixthRevisionQuiz = lazy(() => import('./pages/FrenchSixthRevisionQuiz'))
 const FrenchSixthAcceptance = lazy(() => import('./pages/FrenchSixthAcceptance'))
 const FrenchSixthAcceptanceQuiz = lazy(() => import('./pages/FrenchSixthAcceptanceQuiz'))
+const FrenchSixthProduction = lazy(() => import('./pages/FrenchSixthProduction'))
 const FrenchSeventhControl = lazy(() => import('./pages/FrenchSeventhControl'))
 const FrenchSeventhControlQuiz = lazy(() => import('./pages/FrenchSeventhControlQuiz'))
 const Courses = lazy(() => import('./pages/Courses'))
@@ -70,6 +71,7 @@ function App() {
           <Route path="/courses/6eme/francais/revision/quiz" element={<FrenchSixthRevisionQuiz />} />
           <Route path="/courses/6eme/francais/accepter-les-autres" element={<FrenchSixthAcceptance />} />
           <Route path="/courses/6eme/francais/accepter-les-autres/quiz" element={<FrenchSixthAcceptanceQuiz />} />
+          <Route path="/courses/6eme/francais/module-1-production" element={<FrenchSixthProduction />} />
           <Route path="/courses/6eme/english-unit-1" element={<EnglishUnitOne />} />
           <Route path="/courses/english-tenses" element={<EnglishTenses />} />
           <Route path="/courses/6eme/english-reading" element={<EnglishReading />} />
