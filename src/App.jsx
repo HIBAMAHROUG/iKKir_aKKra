@@ -3,7 +3,6 @@ import { BrowserRouter, Route, Routes, useLocation, Navigate } from 'react-route
 import Footer from './components/Footer'
 import Navbar from './components/Navbar'
 import ArabicGlossary from './components/ArabicGlossary'
-import StudentWorkspace from './components/StudentWorkspace'
 import Home from './pages/Home'
 import LevelCourses from './pages/LevelCourses'
 import { LevelsPage, NotFound, Loading } from './pages/TranslatedPages'
@@ -146,7 +145,6 @@ function App() {
           <Route path="*" element={<NotFound />} />
         </Routes>
         </StudentLevelGuard>
-        <StudentWorkspace key={window.location.pathname} />
         <ArabicGlossary />
         </Suspense>
       </main>
