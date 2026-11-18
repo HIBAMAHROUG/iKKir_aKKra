@@ -77,7 +77,6 @@ function LevelCourses() {
         <p className="eyebrow">Learning path</p>
         <h1>{label}</h1>
         <p>Choose a subject, then open one of its lessons.</p>
-        <Link className="button-link" to="/assistant-correction">🤖 Corriger une production avec l’IA</Link>
       </header>
       <div className="subject-grid">
         {subjects.map((subject) => (

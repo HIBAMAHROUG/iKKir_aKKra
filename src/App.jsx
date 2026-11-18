@@ -60,7 +60,6 @@ const Register = lazy(() => import('./pages/Register'))
 const Profile = lazy(() => import('./pages/Profile'))
 const About = lazy(() => import('./pages/About'))
 const Contact = lazy(() => import('./pages/Contact'))
-const AiCorrection = lazy(() => import('./pages/AiCorrection'))
 
 function App() {
   return (
@@ -126,7 +125,6 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
-          <Route path="/assistant-correction" element={<ProtectedRoute><AiCorrection /></ProtectedRoute>} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <StudentWorkspace key={window.location.pathname} />

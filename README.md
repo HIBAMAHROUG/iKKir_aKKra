@@ -64,8 +64,6 @@ interactifs et un espace personnel permettant de consulter les résultats.
 - Interface responsive et éléments d'accessibilité de base :
   labels de formulaires, rôles ARIA, focus après correction et navigation
   clavier dans les quiz.
-- Assistant de correction IA local pour les productions écrites et les réponses
-  des élèves, accessible aux utilisateurs connectés.
 
 ## Technologies
 
@@ -164,8 +162,6 @@ Le fichier `.env.example` contient :
 DATABASE_URL=postgresql://postgres:mot_de_passe@localhost:5432/ikkir_akkra
 PORT=3001
 CLIENT_URL=http://localhost:5173
-OLLAMA_URL=http://127.0.0.1:11434
-OLLAMA_MODEL=qwen2.5:7b
 ```
 
 | Variable | Obligatoire | Valeur par défaut | Rôle |
@@ -175,23 +171,6 @@ OLLAMA_MODEL=qwen2.5:7b
 | `CLIENT_URL` | Non | `http://localhost:5173` | Origine autorisée par CORS |
 | `TRUST_PROXY` | Non | `false` | Doit être `true` uniquement derrière un reverse proxy de confiance |
 | `NODE_ENV` | Non | aucune | En `production`, impose HTTPS pour `CLIENT_URL` et `TRUST_PROXY=true` |
-| `OLLAMA_URL` | Non | `http://127.0.0.1:11434` | Adresse du serveur Ollama local |
-| `OLLAMA_MODEL` | Non | `qwen2.5:7b` | Modèle utilisé par le correcteur IA |
-
-### Correcteur IA local
-
-Installer Ollama, puis télécharger le modèle choisi :
-
-```bash
-ollama pull qwen2.5:7b
-ollama serve
-```
-
-Après connexion, ouvrir `/assistant-correction`. La clé d’un fournisseur
-externe n’est pas nécessaire : le serveur Node appelle Ollama localement,
-limite les copies à 6000 caractères et applique une limite de 20 corrections
-par heure et par adresse IP.
-
 Format recommandé de `DATABASE_URL` :
 
 ```text
