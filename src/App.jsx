@@ -38,6 +38,7 @@ const FrenchFifthEnvironment = lazy(() => import('./pages/FrenchFifthEnvironment
 const FrenchFifthEnvironmentQuiz = lazy(() => import('./pages/FrenchFifthEnvironmentQuiz'))
 const FrenchFifthModules = lazy(() => import('./pages/FrenchFifthModules'))
 const FrenchFifthModulesQuiz = lazy(() => import('./pages/FrenchFifthModulesQuiz'))
+const FrenchFifthEnvironmentPack = lazy(() => import('./pages/FrenchFifthEnvironmentPack'))
 const FrenchPresent = lazy(() => import('./pages/FrenchPresent'))
 const FrenchPresentQuiz = lazy(() => import('./pages/FrenchPresentQuiz'))
 const FrenchSeventhPast = lazy(() => import('./pages/FrenchSeventhPast'))
@@ -104,6 +105,9 @@ function App() {
           <Route path="/courses/5eme/francais/environnement/quiz" element={<FrenchFifthEnvironmentQuiz />} />
           <Route path="/courses/5eme/francais/modules-1-2" element={<FrenchFifthModules />} />
           <Route path="/courses/5eme/francais/modules-1-2/quiz" element={<FrenchFifthModulesQuiz />} />
+          <Route path="/courses/5eme/francais/environnement-pack/lecture" element={<FrenchFifthEnvironmentPack />} />
+          <Route path="/courses/5eme/francais/environnement-pack/production" element={<FrenchFifthEnvironmentPack />} />
+          <Route path="/courses/5eme/francais/environnement-pack/langue" element={<FrenchFifthEnvironmentPack />} />
           <Route path="/courses/:level/francais/conjugaison-present" element={<FrenchPresent />} />
           <Route path="/courses/:level/francais/conjugaison-present/quiz" element={<FrenchPresentQuiz />} />
           <Route path="/courses/7eme/francais/passe-compose" element={<FrenchSeventhPast />} />

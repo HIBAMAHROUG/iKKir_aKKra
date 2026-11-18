@@ -1,0 +1,20 @@
+.fifth-pack { max-width: 1040px; margin: 0 auto; padding: 48px 24px 72px; }
+.fifth-pack__hero, .fifth-pack__box { margin-bottom: 22px; padding: 30px; border: 1px solid var(--line); border-radius: 22px; background: rgba(255,255,255,.92); box-shadow: 0 14px 35px rgba(15,79,54,.1); animation: reveal-up .45s ease-out backwards; }
+.fifth-pack__hero { text-align: center; background: linear-gradient(135deg,#f1fff5,#fffbed); }
+.fifth-pack__hero h1 { margin: 6px 0 10px; color: var(--green-900); font-size: clamp(2.2rem,6vw,4.2rem); line-height: 1.1; }
+.fifth-pack__hero p:not(.eyebrow) { color: var(--muted); }
+.fifth-pack__nav { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+.fifth-pack__nav a { padding: 10px 16px; border: 1px solid #9dcdb1; border-radius: 999px; background: #fff; font-weight: 700; }
+.fifth-pack__nav a.is-current { color: #fff; background: var(--green-700); }
+.fifth-pack__box h2 { margin: 0 0 16px; color: var(--green-900); }
+.fifth-pack__box h3 { margin-top: 24px; color: var(--green-700); }
+.fifth-pack__box p, .fifth-pack__box li { color: var(--ink); }
+.fifth-pack__reading { padding: 20px; border-left: 4px solid var(--yellow); border-radius: 8px; background: #fffaf0; white-space: pre-line; line-height: 1.85; }
+.fifth-pack__exercise > li { margin: 12px 0; }
+.fifth-pack__box details { margin-top: 18px; padding-top: 12px; border-top: 1px dashed #b9e8d0; }
+.fifth-pack__box summary { color: var(--green-700); cursor: pointer; font-weight: 800; }
+.fifth-pack__word-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin: 18px 0; }
+.fifth-pack__word-grid span { padding: 14px; border-radius: 12px; background: #effcf5; color: var(--green-900); font-weight: 600; }
+.fifth-pack__answer { display: block; color: var(--green-900); font-weight: 700; }
+.fifth-pack__answer textarea { display: block; width: 100%; margin-top: 8px; padding: 12px; border: 1px solid #9dcdb1; border-radius: 10px; color: var(--ink); font: inherit; resize: vertical; }
+@media (max-width: 650px) { .fifth-pack { padding: 28px 16px 48px; } .fifth-pack__hero, .fifth-pack__box { padding: 22px 18px; } .fifth-pack__word-grid { grid-template-columns: 1fr; } }

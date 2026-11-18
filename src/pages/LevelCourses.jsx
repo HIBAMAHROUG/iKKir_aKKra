@@ -27,6 +27,7 @@ function LevelCourses() {
             { title: 'Cahier : présent de l’indicatif', detail: 'Conjugaison, exercices corrigés et quiz /20.', path: '/courses/5eme/francais/conjugaison-present', active: true },
             { title: 'Une idée géniale : environnement', detail: 'Lecture, vocabulaire, grammaire et quiz /20.', path: '/courses/5eme/francais/environnement', active: true },
             { title: 'Modules 1 & 2 : environnement et vivre ensemble', detail: 'Lectures, exercices corrigés, mots-clés en arabe et quiz /20.', path: '/courses/5eme/francais/modules-1-2', active: true },
+            { title: 'Module 1 : Notre environnement', detail: 'Lecture, production écrite et langue en trois parties séparées.', path: '/courses/5eme/francais/environnement-pack/lecture', active: true },
           ]
         : isSixth
         ? [

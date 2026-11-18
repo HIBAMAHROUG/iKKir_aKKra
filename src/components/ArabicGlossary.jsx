@@ -3,6 +3,25 @@ import './ArabicGlossary.css'
 
 const glossaries = [
   {
+    match: '5eme/francais/environnement-pack',
+    title: 'Mots essentiels',
+    words: [
+      ['Planter', 'يغرس / يزرع'],
+      ['Arroser', 'يسقي'],
+      ['Les racines', 'الجذور'],
+      ['Le feuillage', 'أوراق الشجر'],
+      ['Une tournée', 'جولة'],
+      ['Gronder', 'يوبّخ'],
+      ['L’oxygène', 'الأكسجين'],
+      ['Une poubelle', 'سلّة المهملات'],
+      ['Les déchets', 'النفايات'],
+      ['Embellir', 'يجمّل'],
+      ['Désherber', 'ينزع الأعشاب'],
+      ['Recycler', 'يعيد التدوير'],
+      ['La solidarité', 'التضامن'],
+    ],
+  },
+  {
     match: '6eme/francais/module-1-production',
     title: 'Mots intéressants',
     words: [
