@@ -1,0 +1,17 @@
+.lisa-exam { max-width: 1000px; margin: 0 auto; padding: 48px 24px 72px; }
+.lisa-hero, .lisa-box { margin-bottom: 22px; padding: 30px; border: 1px solid var(--line); border-radius: 22px; background: rgba(255,255,255,.9); box-shadow: 0 14px 35px rgba(15,79,54,.1); animation: reveal-up .45s ease-out backwards; }
+.lisa-hero { text-align: center; background: linear-gradient(135deg,#fffaf0,#effcf5); }
+.lisa-hero h1 { margin: 6px 0 10px; color: var(--green-900); font-size: clamp(2rem,5vw,3.8rem); line-height: 1.1; }
+.lisa-hero p:not(.eyebrow) { color: var(--muted); }
+.lisa-nav { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+.lisa-nav a { padding: 10px 16px; border: 1px solid #9dcdb1; border-radius: 999px; background: #fff; font-weight: 700; }
+.lisa-nav a.is-current { color: #fff; background: var(--green-700); }
+.lisa-box h2 { margin: 0 0 15px; color: var(--green-900); }
+.lisa-box p, .lisa-box li { color: var(--ink); }
+.lisa-reading { padding: 20px; border-left: 4px solid var(--yellow); border-radius: 8px; background: #fffaf0; white-space: pre-line; line-height: 1.85; }
+.lisa-questions > li, .lisa-answers > li { margin-bottom: 17px; }
+.lisa-questions ul, .lisa-questions ol, .lisa-answers ul, .lisa-answers ol { margin-top: 8px; }
+.lisa-questions li::marker { color: var(--green-700); font-weight: 700; }
+.lisa-answers strong { color: var(--green-900); }
+.lisa-note { padding: 12px 15px; border-radius: 10px; background: #effcf5; font-style: italic; }
+@media (max-width: 650px) { .lisa-exam { padding: 28px 16px 48px; } .lisa-hero, .lisa-box { padding: 22px 18px; } }

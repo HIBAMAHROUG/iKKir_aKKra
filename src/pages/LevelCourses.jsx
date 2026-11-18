@@ -31,6 +31,7 @@ function LevelCourses() {
         : isSixth
         ? [
             { title: 'Module 1 : Le travail et les métiers', detail: 'Fiche, corrections et évaluation sur 20 points.', path: '/courses/6eme/module-1', active: true },
+            { title: 'Devoir : Lisa la couturière', detail: 'Énoncé seul et correction seule : lecture, avis et langue.', path: '/courses/6eme/francais/devoir-lisa', active: true },
           { title: 'Révision : Modules 1 & 2', detail: 'Groupe nominal, impératif, temps, verbes et quiz /20.', path: '/courses/6eme/francais/revision', active: true },
             { title: 'Cahier : présent de l’indicatif', detail: 'Conjugaison, exercices corrigés et quiz /20.', path: '/courses/6eme/francais/conjugaison-present', active: true },
             { title: 'Module 3 : Accepter les autres', detail: 'Respect, solidarité, grammaire, conjugaison et quiz /20.', path: '/courses/6eme/francais/accepter-les-autres', active: true },

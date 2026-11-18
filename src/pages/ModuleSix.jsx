@@ -124,6 +124,7 @@ function ModuleSix() {
         <h1>Module 1 : Le travail et les métiers</h1>
         <p>Lis les leçons, consulte les corrections, puis passe l’évaluation sur 20 points.</p>
         <Link className="button-link" to="/courses/6eme/francais/module-1-production">🎨 Voir la production écrite : les métiers</Link>
+        <Link className="button-link" to="/courses/6eme/francais/devoir-lisa">🧵 Devoir : Lisa la couturière</Link>
       </div>
 
       <Section title="1. Lecture : Apprentie comédienne" correction={corrections.lecture}>
