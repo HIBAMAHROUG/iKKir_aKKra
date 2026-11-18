@@ -1,0 +1,19 @@
+.ai-correction { max-width: 900px; margin: 0 auto; padding: 48px 24px 72px; }
+.ai-correction__hero, .ai-correction__form, .ai-correction__result { margin-bottom: 22px; padding: 30px; border: 1px solid var(--line); border-radius: 22px; background: rgba(255,255,255,.92); box-shadow: 0 14px 35px rgba(15,79,54,.1); }
+.ai-correction__hero { text-align: center; background: linear-gradient(135deg,#effcf5,#fffbed); }
+.ai-correction__hero h1 { margin: 8px 0; color: var(--green-900); font-size: clamp(2.2rem,6vw,4rem); line-height: 1.1; }
+.ai-correction__hero p:not(.eyebrow) { color: var(--muted); }
+.ai-correction__fields { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.ai-correction label { display: grid; gap: 6px; margin-bottom: 17px; color: var(--green-900); font-weight: 700; }
+.ai-correction select, .ai-correction textarea { width: 100%; padding: 12px; border: 1px solid #9dcdb1; border-radius: 10px; color: var(--ink); background: #fff; font: inherit; }
+.ai-correction textarea { resize: vertical; }
+.ai-correction button[disabled] { cursor: wait; opacity: .65; }
+.ai-correction__privacy { color: var(--muted); font-size: .9rem; }
+.ai-correction__error { padding: 15px; border-radius: 10px; color: #8b1e1e; background: #fff0f0; }
+.ai-correction__result h2 { margin: 0 0 10px; color: var(--green-900); font-size: 1.2rem; }
+.ai-correction__score { display: flex; align-items: center; gap: 14px; margin-bottom: 22px; color: var(--muted); }
+.ai-correction__score strong { color: var(--green-700); font-size: 2.4rem; }
+.ai-correction__list, .ai-correction__text, .ai-correction__advice { margin-top: 20px; padding-top: 18px; border-top: 1px dashed #b9e8d0; }
+.ai-correction__list li, .ai-correction__text p, .ai-correction__advice p { color: var(--ink); line-height: 1.75; }
+.ai-correction__advice { padding: 16px; border: 0; border-radius: 12px; background: #effcf5; }
+@media (max-width: 650px) { .ai-correction { padding: 28px 16px 48px; } .ai-correction__hero, .ai-correction__form, .ai-correction__result { padding: 22px 18px; } .ai-correction__fields { grid-template-columns: 1fr; gap: 0; } }

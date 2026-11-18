@@ -39,6 +39,11 @@ const writeRateLimit = rateLimit({
   max: 30,
   message: 'Trop de requêtes. Réessayez plus tard.',
 });
+const aiRateLimit = rateLimit({
+  windowMs: 60 * 60 * 1000,
+  max: 20,
+  message: 'Trop de corrections IA. Réessayez plus tard.',
+});
 
 function publicUser(user) {
   return { id: user.id, name: user.name, email: user.email, createdAt: user.created_at };
@@ -168,6 +173,59 @@ app.post('/api/results', authenticate, writeRateLimit, async (req, res) => {
     [req.user.id, quiz, score, total],
   );
   res.status(201).json(rows[0]);
+});
+
+function validateAiResult(value) {
+  if (!value || typeof value !== 'object') return null;
+  const score = Number(value.score);
+  if (!Number.isFinite(score) || score < 0 || score > 20) return null;
+  const list = (items) => Array.isArray(items) ? items.filter((item) => typeof item === 'string').slice(0, 8) : [];
+  if (typeof value.correctedText !== 'string' || typeof value.advice !== 'string') return null;
+  return {
+    score: Math.round(score * 2) / 2,
+    correctedText: value.correctedText.slice(0, 8000),
+    strengths: list(value.strengths),
+    corrections: list(value.corrections),
+    advice: value.advice.slice(0, 1200),
+  };
+}
+
+app.post('/api/ai/correct', authenticate, aiRateLimit, async (req, res) => {
+  const { type, level, text } = req.body;
+  if (!['production', 'answers'].includes(type) || typeof level !== 'string' || !/^[5-7]e année$/.test(level) || typeof text !== 'string' || text.trim().length < 3 || text.length > 6000) {
+    return res.status(400).json({ error: 'Le travail à corriger est invalide.' });
+  }
+
+  const ollamaUrl = process.env.OLLAMA_URL || 'http://127.0.0.1:11434';
+  const model = process.env.OLLAMA_MODEL || 'qwen2.5:7b';
+  const task = type === 'production' ? 'une production écrite' : 'des réponses à des questions';
+  const system = `Tu es un professeur de français bienveillant pour des élèves de ${level}. Corrige ${task}.
+Réponds uniquement avec un objet JSON valide contenant exactement ces champs :
+{"score":0,"strengths":[],"corrections":[],"correctedText":"","advice":""}
+Le score est sur 20 et reste indicatif. Signale les fautes réelles de grammaire, conjugaison, orthographe, vocabulaire et ponctuation. Ne pénalise pas une réponse correcte formulée autrement. Fais des explications courtes et simples en français. Ne fabrique aucune information absente du texte.`;
+
+  try {
+    const ollamaResponse = await fetch(`${ollamaUrl}/api/chat`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      signal: AbortSignal.timeout(45_000),
+      body: JSON.stringify({
+        model,
+        stream: false,
+        format: 'json',
+        messages: [{ role: 'system', content: system }, { role: 'user', content: text.trim() }],
+        options: { temperature: 0.2 },
+      }),
+    });
+    if (!ollamaResponse.ok) throw new Error(`Ollama HTTP ${ollamaResponse.status}`);
+    const body = await ollamaResponse.json();
+    const result = validateAiResult(JSON.parse(body.message?.content || '{}'));
+    if (!result) throw new Error('Réponse IA invalide.');
+    res.json({ result });
+  } catch (error) {
+    console.error('Correction IA indisponible:', error.message);
+    res.status(503).json({ error: 'Le correcteur IA est indisponible. Vérifiez qu’Ollama est lancé et que le modèle est installé.' });
+  }
 });
 
 
