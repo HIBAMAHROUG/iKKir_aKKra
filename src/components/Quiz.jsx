@@ -75,10 +75,21 @@ function QuizInner({ theme, eyebrow, title, subtitle, questions, points = 1, bac
           const isRight = chosen === item.answer
           return <fieldset id={`${uid}-q${index}`} className={`${classes.question}${submitted ? ' qz-locked' : ''}`} key={index}>
             <legend>{index + 1}. {item.q}</legend>
-            {item.options.map((option, optionIndex) => {
-              const state = submitted ? optionIndex === item.answer ? ' qz-option--right' : optionIndex === chosen ? ' qz-option--wrong' : '' : ''
-              return <label key={optionIndex} className={`qz-option${state}`}><input type="radio" name={`${uid}-${index}`} checked={chosen === optionIndex} onChange={() => { if (!submitted) setSelected((current) => ({ ...current, [index]: optionIndex })) }} />{option}</label>
-            })}
+            <button
+              type="button"
+              className={`qz-blank${chosen !== undefined ? ' qz-blank--filled' : ''}${submitted ? (isRight ? ' qz-blank--right' : ' qz-blank--wrong') : ''}`}
+              onClick={() => { if (!submitted) setSelected((current) => { const next = { ...current }; delete next[index]; return next }) }}
+              aria-label={chosen === undefined ? 'Case vide' : `Réponse choisie : ${item.options[chosen]}. Cliquer pour effacer`}
+              disabled={submitted}
+            >
+              {chosen === undefined ? 'Clique ici pour placer une réponse' : item.options[chosen]}
+            </button>
+            <div className="qz-word-bank" aria-label="Réponses disponibles">
+              {item.options.map((option, optionIndex) => {
+                const state = submitted ? optionIndex === item.answer ? ' qz-option--right' : optionIndex === chosen ? ' qz-option--wrong' : '' : chosen === optionIndex ? ' qz-option--used' : ''
+                return <button key={optionIndex} type="button" className={`qz-option${state}`} onClick={() => { if (!submitted) setSelected((current) => ({ ...current, [index]: optionIndex })) }} disabled={submitted}>{option}</button>
+              })}
+            </div>
             {submitted && <p className={`qz-feedback ${isRight ? 'qz-feedback--ok' : 'qz-feedback--ko'}`}><span aria-hidden="true">{isRight ? '✓' : '✗'}</span>{' '}{isRight ? t.right : chosen === undefined ? t.none(item.options[item.answer]) : t.wrong(item.options[item.answer])}</p>}
           </fieldset>
         })}

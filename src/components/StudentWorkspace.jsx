@@ -5,12 +5,12 @@ import { useAuth } from '../auth/useAuth'
 import './StudentWorkspace.css'
 
 const missions = [
-  { title: 'Mission étoiles', icon: '⭐', choices: ['Très facile', 'Facile', 'Un peu difficile'] },
-  { title: 'Je choisis', icon: '🎯', choices: ['Je suis sûr', 'Je vérifie', 'Je demande de l’aide'] },
-  { title: 'Début ou fin ?', icon: '🧩', choices: ['Le début', 'La suite', 'La fin'] },
-  { title: 'Juste ou faux ?', icon: '💡', choices: ['Vrai', 'Faux', 'Je ne sais pas'] },
-  { title: 'Le bon mot', icon: '🔤', choices: ['Mot appris', 'Mot nouveau', 'Mot difficile'] },
-  { title: 'Mon défi', icon: '🏆', choices: ['Terminé', 'À terminer', 'Je suis bloqué'] },
+  { title: 'Le bon verbe', icon: '⭐', sentence: 'Je ___ une histoire.', choices: ['lis', 'lit', 'lire'], answer: 'lis' },
+  { title: 'Le bon mot', icon: '🎯', sentence: 'Nous travaillons ___ équipe.', choices: ['en', 'un', 'et'], answer: 'en' },
+  { title: 'La bonne action', icon: '🧩', sentence: 'Le policier ___ les citoyens.', choices: ['protège', 'protègent', 'protéger'], answer: 'protège' },
+  { title: 'Le bon adjectif', icon: '💡', sentence: 'La fleur est ___.', choices: ['colorée', 'colorer', 'couleur'], answer: 'colorée' },
+  { title: 'La bonne liaison', icon: '🔤', sentence: 'D’abord, je lis. ___, je réponds.', choices: ['Ensuite', 'Jamais', 'Hier'], answer: 'Ensuite' },
+  { title: 'Le bon temps', icon: '🏆', sentence: 'Demain, je ___ mon devoir.', choices: ['ferai', 'fais', 'faire'], answer: 'ferai' },
 ]
 
 const sentenceParts = [
@@ -41,7 +41,7 @@ function StudentWorkspace() {
   function saveNow() {
     localStorage.setItem(`student:${pathname}:game`, JSON.stringify(answers))
     localStorage.setItem(`student:${pathname}:parts`, JSON.stringify(builtParts))
-    const stars = answers.filter(Boolean).length
+    const stars = answers.filter((answer, index) => answer === missions[index].answer).length
     if (user && stars > 0) {
       api('/progress/workspace', {
         method: 'POST',
@@ -58,7 +58,7 @@ function StudentWorkspace() {
     setSaved(false)
   }
 
-  const stars = answers.filter(Boolean).length
+  const stars = answers.filter((answer, index) => answer === missions[index].answer).length
 
   return (
     <aside className="student-workspace" aria-label="Jeux de réponses de l’élève">
@@ -71,6 +71,15 @@ function StudentWorkspace() {
         {missions.map((mission, index) => (
           <section className="student-workspace__mission" key={mission.title}>
             <div className="student-workspace__mission-title"><span>{mission.icon}</span><h3>{index + 1}. {mission.title}</h3></div>
+            <p className="student-workspace__sentence-prompt">{mission.sentence}</p>
+            <button
+              type="button"
+              className={`student-workspace__blank${answers[index] ? ' is-filled' : ''}${answers[index] && answers[index] === mission.answer ? ' is-correct' : ''}`}
+              onClick={() => chooseAnswer(index, null)}
+              aria-label={answers[index] ? `Effacer ${answers[index]}` : 'Blanc vide'}
+            >
+              {answers[index] || 'Clique sur une carte pour remplir le blanc'}
+            </button>
             <div className="student-workspace__choices">
               {mission.choices.map((choice) => (
                 <button type="button" key={choice} aria-pressed={answers[index] === choice} className={answers[index] === choice ? 'is-selected' : ''} onClick={() => chooseAnswer(index, choice)}>{choice}</button>

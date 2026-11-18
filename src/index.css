@@ -179,6 +179,34 @@ a:hover {
   color: var(--green-900);
 }
 
+/* Legacy quizzes use the same touch-friendly word-card treatment as Quiz.jsx. */
+.quiz-question label,
+.fourth-question label {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  margin: 6px 8px 0 0;
+  padding: 8px 14px;
+  border: 2px solid #a8d3ba;
+  border-radius: 12px;
+  background: #fff;
+  color: var(--green-900);
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.quiz-question label:has(input:checked),
+.fourth-question label:has(input:checked) {
+  border-color: var(--yellow);
+  background: #fff8d9;
+}
+
+.quiz-question input,
+.fourth-question input {
+  margin-right: 8px;
+  accent-color: var(--green-700);
+}
+
 .fifth-question legend,
 .reading-question legend,
 .seventh-question legend,
@@ -301,4 +329,3 @@ a:hover {
   color: #ffffff;
   background: var(--green-500);
 }
-
