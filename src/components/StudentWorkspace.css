@@ -1,0 +1,59 @@
+.student-workspace {
+  width: min(100% - 48px, 1040px);
+  margin: 12px auto 48px;
+  padding: 28px;
+  border: 2px solid #a8d3ba;
+  border-radius: 22px;
+  background: #fff;
+  box-shadow: 0 14px 35px rgba(15,79,54,.12);
+}
+.student-workspace__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+.student-workspace__header h2 { margin: 4px 0 0; color: var(--green-900); }
+.student-workspace__badge { padding: 7px 10px; border-radius: 999px; background: var(--green-100); color: var(--green-900); font-size: .78rem; font-weight: 800; }
+.student-workspace section { padding: 18px 0; border-top: 1px dashed #bdd8c8; }
+.student-workspace h3 { margin: 0 0 5px; color: var(--green-900); }
+.student-workspace section > p { margin: 0 0 12px; color: var(--muted); }
+.student-workspace__answer-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+.student-workspace__answer-grid label { display: grid; gap: 5px; color: var(--green-900); font-size: .9rem; font-weight: 800; }
+.student-workspace input, .student-workspace textarea {
+  width: 100%;
+  border: 2px solid #b4cdbf;
+  border-radius: 10px;
+  color: var(--ink);
+  background: #fbfffc;
+  font: inherit;
+}
+.student-workspace input { min-height: 44px; padding: 9px 11px; }
+.student-workspace textarea { padding: 13px; resize: vertical; line-height: 1.7; }
+.student-workspace input:focus, .student-workspace textarea:focus { outline: 3px solid rgba(25,169,104,.18); border-color: var(--green-700); }
+.student-workspace__word-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
+.student-workspace__actions { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; padding-top: 18px; border-top: 1px solid var(--line); }
+.student-workspace__actions button { min-height: 42px; padding: 9px 14px; border: 0; border-radius: 10px; color: #fff; background: var(--green-700); font: inherit; font-weight: 800; cursor: pointer; }
+.student-workspace__actions .student-workspace__clear { color: var(--green-900); background: #eef5f1; }
+.student-workspace__actions span { color: var(--green-700); font-weight: 800; }
+
+body :is(.present-answer,.tense-answer,.fourth-answer,.environment-answer,.fifth-answer,.seventh-answer,.reading-answer,.answer-field) :is(input,textarea),
+body :is(.lisa-questions,.lisa-box) textarea {
+  min-height: 48px;
+  border-width: 2px;
+  border-color: #86b09a;
+  background: #fff;
+}
+
+@media (max-width: 650px) {
+  .student-workspace { width: min(100% - 32px,1040px); padding: 20px 16px; }
+  .student-workspace__header { display: block; }
+  .student-workspace__badge { display: inline-block; margin-top: 8px; }
+  .student-workspace__answer-grid, .student-workspace__word-grid { grid-template-columns: 1fr; }
+}
+
+@media print {
+  .navbar, .site-footer, .arabic-glossary, .student-workspace__actions { display: none !important; }
+  .student-workspace { width: 100%; margin: 20px 0; box-shadow: none; break-inside: avoid; }
+}
